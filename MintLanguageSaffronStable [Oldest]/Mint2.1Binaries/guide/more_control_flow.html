@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>More Control Flow</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">More Control Flow</span><br />
+<span class="subtitle">Conditional Jumps</span>
+</div>
+<br />
+<table class="main"><tr><td>
+The while statement is designed to do an action repeatedly. While the while statement's condition is true, it keeps executing its clause.
+When the condition becomes false, it skips the clause.<br />
+
+<pre>i = <span class="number">11</span>
+<span class="keyword">while</span> i > <span class="number">0</span>
+    i--
+    <span class="keyword">print </span>i     <span class="comment">//Counts down from 10 to 0.</span>
+<span class="keyword">end</span>
+<span class="keyword">print </span><span class="string">"Done!"</span></pre>
+
+The for statement is similar to the while statement except that it takes a different format.<br />
+
+<pre><span class="keyword">for</span> &lt;initialization>; &lt;condition>; &lt;change>
+    <span class="comment">//Clause</span>
+<span class="keyword">end</span></pre>
+
+The initialization statement is executed once before the for loop begins. The condition is checked so that the for loop can keep running (the for loop
+stops running once the condition is false), and the change statement occurs every time the for loop reaches the end of its clause.<br />
+
+<pre><span class="keyword">for</span> i = <span class="number">1</span><span class="number">0</span>; i >= <span class="number">0</span>; i--
+    <span class="keyword">print </span>i    <span class="comment">//Counts down from 10 to 0</span>
+<span class="keyword">end</span>
+<span class="keyword">print </span><span class="string">"Done!"</span></pre>
+
+There's a special variation of the for loop known as the for each loop, which goes across each item in an iterable. An iterable is a variable that
+holds a series of items, such as a list or a string. Strings are variables that hold text. Text values are enclosed in double quotes, as we've seen many
+times before.<br />
+
+<pre>x = <span class="string">"hello"</span>                               <span class="comment">//This is a string.</span>
+y = [<span class="number">1</span><span class="number">0</span>, <span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">5</span>, <span class="number">4</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">1</span>, <span class="number">0</span>]    <span class="comment">//This is a list of numbers.</span>
+<span class="keyword">for</span> <span class="keyword">each</span> i <span class="keyword">of</span> y
+    <span class="keyword">print </span>i     <span class="comment">//Counts down from 10 to 0.</span>
+<span class="keyword">end</span>
+<span class="keyword">for</span> <span class="keyword">each</span> character <span class="keyword">of</span> x
+    <span class="keyword">print </span>character    <span class="comment">//Prints every character in "hello".</span>
+<span class="keyword">end</span></pre>
+
+Lists are enclosed in square brackets and have elements separated by commas. We will learn more about them later.<br /><br />
+
+There's a simplified version of the for loop known as the repeat loop.<br />
+
+<pre><span class="keyword">repeat</span> <span class="number">5</span>
+    <span class="keyword">print </span><span class="string">"Hi"</span>   <span class="comment">//Prints Hi five times.</span>
+<span class="keyword">end</span>
+
+i = <span class="number">1</span><span class="number">0</span>
+z = <span class="number">0</span>
+<span class="keyword">repeat</span> i
+    z++          <span class="comment">//Counts up from 1 to 10.</span>
+    <span class="keyword">print </span>z
+<span class="keyword">end</span></pre>
+
+repeat &lt;number> will repeat its clause &lt;number> times. If you use a variable after the repeat keyword, the variable is not modified. Instead, the repeat loop
+repeats its clause for the number of times indicated by the current value of the variable.<br /><br />
+
+Switch statements are a special case of the if ... else if ... else construction.<br />
+
+<pre>x = <span class="number">3</span>
+
+<span class="keyword">switch </span>x
+    <span class="keyword">case </span><span class="number">1</span>
+        <span class="keyword">print </span><span class="string">"x is one."</span>
+    <span class="keyword">case </span><span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>
+        <span class="keyword">print </span><span class="string">"x is in the set {2, 3, 4}."</span>
+    <span class="keyword">case </span><span class="number">5</span>
+        <span class="keyword">print </span><span class="string">"x is five."</span>
+    <span class="keyword">default</span>
+        <span class="keyword">print </span><span class="string">"x is not an integer between 1 and 5."</span>
+<span class="keyword">end</span></pre>
+
+switch &lt;number> will search all cases in the switch clause for the corresponding number, and executes the corresponding case.<br />
+If there are no matching cases, the default case is executed.<br />
+Unlike other programming languages, in Mint cases do not "fall through", and therefore don't need to be terminated with a break statement.<br /><br />
+
+I also included a simplified version of the if statement known as the conditional or ternary operator.
+Here it is:
+<br />
+<pre>var = <span class="string">"hi"</span> == <span class="string">"hi"</span> <span class="keyword">yield</span> <span class="number">100</span> <span class="keyword">otherwise</span> <span class="number">200</span>
+<span class="keyword">print</span> var
+t = <span class="number">0</span> != <span class="number">0</span> ? <span class="number">1</span> : <span class="number">2</span>
+<span class="keyword">print</span> t</pre>
+
+You may either use yield ... otherwise or the ?: operator to perform a conditional.
+<br /><br />
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="basic_control_flow.html">Basic Control Flow</a><br />
+Next Lesson: <a href="lists.html">Lists</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

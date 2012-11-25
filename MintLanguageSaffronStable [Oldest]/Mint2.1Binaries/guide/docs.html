@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Documentation</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Documentation</span><br />
+<span class="subtitle">Subprogram Listing</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Here is a listing of all built-in subprograms in the Mint libraries.<br /><br />
+
+<span class="section_title">Library operator</span><br />
+The operator library provides common operators such as +, -, *, / in subprogram format.<br /><br />
+
+<code>bitNot(a)</code><br />
+Returns the bitwise NOT of a. This is the same as <code>~a</code> in other programming languages.<br /><br />
+
+<code>neg(a)</code><br />
+Returns negative a.<br /><br />
+
+<code>bitAnd(a, b)</code><br />
+Returns the bitwise AND of a and b. This is the same as <code>a &amp; b</code> in other programming langugages.<br /><br />
+
+<code>bitOr(a, b)</code><br />
+Returns the bitwise OR of a and b. This is the same as <code>a | b</code> in other programming languages.<br /><br />
+
+<code>bitXor(a, b)</code><br />
+Returns the bitwise XOR of a and b. This is the same as <code>a ^ b</code> in other programming languages. Note that in Mint, ^ means "to the power of" and not bitwise XOR.<br /><br />
+
+<code>pow(a, b)</code><br />
+Returns a to the power of b.<br /><br />
+
+<code>shl(a, b)</code><br />
+Takes the integer a and shifts it b bits to the left. This is the same as <code>a &lt;&lt; b</code> in other programming languages.<br /><br />
+
+<code>shr(a, b)</code><br />
+Takes the integer a and shifts it b bits to the right. This is the same as <code>a >>> b</code> in other programming languages.<br /><br />
+
+<code>sar(a, b)</code><br />
+Takes the integer a and shifts it b bits to the right. The old most significant bit is copied into the new most significant bit. This is the same as
+<code>a >> b</code> in other programming languages.<br /><br />
+
+<code>plus(a, b)</code><br />
+Returns <code>a + b</code>.<br /><br />
+
+<code>minus(a, b)</code><br />
+Returns <code>a - b</code>.<br /><br />
+
+<code>mul(a, b)</code><br />
+Returns a times b.<br /><br />
+
+<code>div(a, b)</code><br />
+Returns a divided by b.<br /><br />
+
+<code>inc(a)</code><br />
+Returns <code>a + 1</code>.<br /><br />
+
+<code>dec(a)</code><br />
+Returns <code>a - 1</code>.<br /><br />
+
+<code>intDiv(a, b)</code><br />
+Performs division between a and b, rounding down to the nearest whole number. <code>floorDiv(a, b)</code> does the same thing.<br /><br />
+
+<code>logicAnd(a, b)</code><br />
+Returns true only if a and b are both true. Otherwise, returns false.<br /><br />
+
+<code>logicOr(a, b)</code><br />
+Returns true if a or b is true. Otherwise, returns false.<br /><br />
+
+<code>logicXor(a, b)</code><br />
+Returns true if either a or b is true, but not both. Otherwise, returns false.<br /><br />
+
+<code>logicNot(a)</code><br />
+Returns true if a is false, and false if a is true.<br /><br />
+
+<code>eq(a, b)</code><br />
+Returns true if a equals b.<br /><br />
+
+<code>notEq(a, b)</code><br />
+Returns true if a is not equal to b.<br /><br />
+
+<code>greater(a, b)</code><br />
+Returns true if a is greater than b.<br /><br />
+
+<code>lesser(a, b)</code><br />
+Returns true if a is less than b.<br /><br />
+
+<code>greaterEq(a, b)</code><br />
+Returns true if a is greater than or equal to b.<br /><br />
+
+<code>lesserEq(a, b)</code><br />
+Returns true if a is less than or equal to b.<br /><br />
+
+<span class="section_title">Library math</span><br />
+The math library provides mathematical constants and math subprograms.<br /><br />
+
+<code>e</code><br />
+An approximation of the base of the natural logarithm. It is a constant equal to 2.7182818284590452354.<br /><br />
+
+<code>pi</code><br />
+An approximation of the ratio between a circle's circumference and diameter. It is a constant equal to 3.14159265358979323846.<br /><br />
+
+<code>phi</code><br />
+An approximation of the golden ratio. It is equal to half of 1 plus the square root of 5 or 1.618033988749895.<br /><br />
+
+<code>abs(a)</code><br />
+Returns the absolute value of a.<br /><br />
+
+<code>sin(a)</code><br />
+Returns the sine of a radians.<br /><br />
+
+<code>cos(a)</code><br />
+Returns the cosine of a radians.<br /><br />
+
+<code>tan(a)</code><br />
+Returns the tangent of a radians.<br /><br />
+
+<code>asin(a)</code><br />
+Returns the arcsine of a.<br /><br />
+
+<code>acos(a)</code><br />
+Returns the arccosine of a.<br /><br />
+
+<code>atan(a)</code><br />
+Returns the arctangent of a.<br /><br />
+
+<code>sinh(a)</code><br />
+Returns the hyperbolic sine of a.<br /><br />
+
+<code>cosh(a)</code><br />
+Returns the hyperbolic cosine of a.<br /><br />
+
+<code>tanh(a)</code><br />
+Returns the hyperbolic tangent of a.<br /><br />
+
+<code>asinh(a)</code><br />
+Returns the hyperbolic arcsine of a.<br /><br />
+
+<code>acosh(a)</code><br />
+Returns the hyperbolic arccosine of a.<br /><br />
+
+<code>atanh(a)</code><br />
+Returns the hyperbolic arctangent of a.<br /><br />
+
+<code>ln(a)</code><br />
+Returns the natural log of a.<br /><br />
+
+<code>log10(a)</code><br />
+Returns the log base 10 of a.<br /><br />
+
+<code>sqrt(a)</code><br />
+Returns the square root of a.<br /><br />
+
+<code>cbrt(a)</code><br />
+Returns the cube root of a.<br /><br />
+
+<code>factorial(a)</code><br />
+Returns a!, where ! means factorial.<br /><br />
+
+<code>log(a, b)</code><br />
+Returns the log base b of a.<br /><br />
+
+<code>min(a, b)</code><br />
+Returns a if a is less than b. Otherwise, returns b.<br /><br />
+
+<code>max(a, b)</code><br />
+Returns a if a is greater than b. Otherwise, returns b.<br /><br />
+
+<code>BigInt(a)</code><br />
+Constructs a big integer object from a. a can be a real number, an integer, or string. Big integers can hold extremely large numbers.<br />
+For example, try:<br />
+
+<pre>import math
+print factorial(BigInt(500))</pre>
+
+<code>PreciseReal(a)</code><br />
+Constructs a precise real object from a. a can be a real number, an integer, or string. Precise reals offer more precision than regular real numbers.<br />
+Compare:<br />
+
+<pre>import math
+print 1 / 3
+print PreciseReal(1) / PreciseReal(3)</pre>
+
+<span class="section_title">Library type</span><br />
+The type library offers subprograms that convert between the different variable types of Mint.<br /><br />
+
+<code>string(a)</code><br />
+Converts a into a string.<br /><br />
+
+<code>int(a)</code><br />
+Converts a into an integer.<br /><br />
+
+<code>real(a)</code><br />
+Converts a into a real number.<br /><br />
+
+<code>truth(a)</code><br />
+Converts a into a truth value, either true or false.<br /><br />
+
+<code>type(a)</code><br />
+Returns the type of object a as a string.<br /><br />
+
+<code>list(a)</code><br />
+Converts a into a list.<br /><br />
+
+<code>char(a)</code><br />
+Converts the integer a into an ASCII character.<br /><br />
+
+<span class="section_title">Library time</span><br />
+The time library offers subprograms that measure or deal with time.<br /><br />
+
+<code>wait(a)</code><br />
+Causes the program to wait for a milliseconds.<br /><br />
+
+<code>year()</code><br />
+Returns the current year.<br /><br />
+
+<code>amPm()</code><br />
+Returns the string "am" if it is before noon, and "pm" otherwise.<br /><br />
+
+<code>date()</code><br />
+Returns a string that represents the current date.<br /><br />
+
+<code>hour()</code><br />
+Returns the current hour in 12-hour format.<br /><br />
+
+<code>hour24HourFormat()</code><br />
+Returns the current hour in 24-hour format.<br /><br />
+
+<code>millisecond()</code><br />
+Returns the current millisecond.<br /><br />
+
+<code>minute()</code><br />
+Returns the current minute.<br /><br />
+
+<code>month()</code><br />
+Returns the current month as a number between 1 and 12.<br /><br />
+
+<code>second()</code><br />
+Returns the current second.<br /><br />
+
+<code>timeZone()</code><br />
+Returns the current timezone as a string.<br /><br />
+
+<code>weekday()</code><br />
+Returns the current weekday as a string.<br /><br />
+
+<code>weekdayNumber()</code><br />
+Returns the current weekday, where 0 is Sunday and 6 is Saturday.<br /><br />
+
+<span class="section_title">Library system</span><br />
+The system library offers subprograms that deal with system functions.<br /><br />
+
+<code>exit()</code><br />
+Exits the Mint program.<br /><br />
+
+<code>getArgs()</code><br />
+Returns the command line arguments passed to the program as a list of strings.<br /><br />
+
+<span class="section_title">Library file</span><br />
+The file library offers subprograms that modify files and folders.<br /><br />
+
+<code>Bytes(a)</code><br />
+Creates a bytes object out of a, where a is a list of integers or a string.<br /><br />
+
+<code>appendStrToFile(fileName, s)</code><br />
+Appends the string s to the file with name fileName.
+
+<code>bytesToHex(bytes)</code><br />
+Converts a bytes object to a string of hexadecimal digits.<br /><br />
+
+<code>canReadAndWrite(fileName)</code><br />
+Returns true if it is possible to read and write to the file with name fileName.<br /><br />
+
+<code>copyFile(file1, file2)</code><br />
+Copies file1 to file2.<br /><br />
+
+<code>delete(f)</code><br />
+Deletes file or folder f.<br /><br />
+
+<code>exists(f)</code><br />
+Returns true if file or folder f exists.<br /><br />
+
+<code>fileToStr(fileName)</code><br />
+Converts a file's contents into a string.<br /><br />
+
+<code>fullPathToRelPath(path)</code><br />
+Converts a full path to a relative path, relative to the program's path.<br /><br />
+
+<code>getCurrentFolder()</code><br />
+Gets the folder name of the folder the program is in.<br /><br />
+
+<code>getFileSize(fileName)</code><br />
+Gets the size of file fileName.<br /><br />
+
+<code>getFilesInFolder(folderName)</code><br />
+Returns a list of filenames in the folder folderName.<br /><br />
+
+<code>hexToBytes(hex)</code><br />
+Converts a hexadecimal string of digits into a bytes object.<br /><br />
+
+<code>makeFolder(folder)</code><br />
+Creates the folder folder.<br /><br />
+
+<code>readBytes(file, begin, end)</code><br />
+Reads a bytes object from file, where the bytes begin at position begin and end at position end.<br /><br />
+
+<code>readHex(file, begin, end)</code><br />
+Reads a hexadecimal string of digits from file, where the hex begins at position begin and ends and position end.<br /><br />
+
+<code>removeFileExtension(fileName)</code><br />
+Returns fileName, but with the file extension removed.<br /><br />
+
+<code>strToFile(s, fileName)</code><br />
+Writes the string s to file fileName.<br /><br />
+
+<code>writeBytes(fileName, bytes, begin)</code><br />
+Writes bytes to the file fileName starting at position begin.<br /><br />
+
+<code>writeHex(fileName, hex, begin)</code><br />
+Writes a hexadecimal string of digits to the file fileName starting at position begin.<br /><br />
+
+<code>fileLength(fileName)</code><br />
+Same as <code>getFileSize(fileName)</code>.<br /><br />
+
+<span class="section_title">Library web</span><br />
+The web library offers subprograms that interface with the Internet.<br /><br />
+
+<code>getWebsiteContents(url)</code><br />
+Gets the HTML contents of the website url.<br /><br />
+
+<code>downloadFile(url, fileName)</code><br />
+Downloads a file from url to file fileName.<br /><br />
+
+<code>connectToIRC(server, botName, channels, showDebug, commandsSub)</code><br />
+Sets up an IRC bot on server server, with name botName, on a list of channels channels, with a debugging mode showDebug, and a subprogram commandsSub that will
+be executed whenever the bot receives a message. commandsSub takes five arguments, all of which are strings, which are channel, sender, login, hostname, and message.<br /><br />
+
+<code>sendMessage(channel, msg)</code><br />
+This subprogram can only be used inside your commands subprogram for connectToIRC. It sends the string msg to the channel channel, thereby chatting on IRC.<br /><br />
+
+<code>sendRawLine(msg)</code><br />
+This subprogram can only be used inside your commands subprogram for connectToIRC. It sends the string msg to the channel channel, but performs no modifications to the string. This is used to execute IRC commands.<br />
+Unfortunately, it is not currently possible to control the channel on which the message displays.
+For example:<br />
+<pre><span class="keyword">import</span> web
+<span class="keyword">import</span> time
+<span class="keyword">import</span> system
+
+<span class="keyword">sub</span> commands(one, two, three, four, five)
+    sendMessage(<span class="string">"#curlybrace"</span>, <span class="string">"hi"</span>)    <span class="comment">//Says hi on #curlybrace.</span>
+    sendRawLine(<span class="string">"NICK Curly"</span>)           <span class="comment">//Changes the bot's nickname to Curly.</span>
+<span class="keyword">end</span>
+
+connectToIRC(<span class="string">"aperture.esper.net"</span>, <span class="string">"MintBot"</span>, [<span class="string">"#curlybrace"</span>], <span class="keyword">true</span>, commands)</pre>
+
+<code>openWebBrowser(url)</code><br />
+Opens a web browser page that points to url.<br /><br />
+
+<code>getIPAddress()</code><br />
+Gets the IP address of the computer.<br /><br />
+
+<span class="section_title">Library mint</span><br />
+The mint library offers subprograms that interface with the Mint interpreter.<br /><br />
+
+<code>eval(s)</code><br />
+Evaluates the expression s and returns the resulting value.<br /><br />
+
+<code>exec(s)</code><br />
+Executes the string s as a Mint program.<br /><br />
+
+<span class="section_title">Library graphics</span><br />
+The graphics library offers subprograms that draw graphics to the screen.<br /><br />
+
+<code>Window()</code><br />
+Creates a window object.<br /><br />
+
+<code>showMessageBox(title, msg)</code><br />
+Shows a message box with a title and message.<br /><br />
+
+<code>showWarningBox(title, msg)</code><br />
+Shows a warning box with a title and message.<br /><br />
+
+<code>showErrorBox(title, msg)</code><br />
+Shows a error box with a title and message.<br /><br />
+
+<code>showPlainBox(title, msg)</code><br />
+Shows a plain message box with a title and message.<br /><br />
+
+<code>showQuestionBox(title, msg)</code><br />
+Shows a question box with a title and message. If the selected option is yes, returns true. If the selected option is no, returns false.<br /><br />
+
+<code>Button()</code><br />
+Creates a button object, which can be added to a window.<br /><br />
+
+<code>Arc(x, y, width, height, startAngle, arcAngle)</code><br />
+Creates an arc object which can be drawn onto a window.<br /><br />
+
+<code>Line(x, y, x2, y2)</code><br />
+Creates an line object which can be drawn onto a window.<br /><br />
+
+<code>Oval(x, y, width, height)</code><br />
+Creates an oval object which can be drawn onto a window.<br /><br />
+
+<code>Polygon(x, y, x2, y2, x3, y3, ...)</code><br />
+Creates an polygon object consisting of the points (x, y), (x2, y2), (x3, y3), etc. which can be drawn onto a window.<br /><br />
+
+<code>Rectangle(x, y, width, height)</code><br />
+Creates an rectangle object which can be drawn onto a window.<br /><br />
+
+<span class="section_title">Library thread</span><br />
+The thread library offers subprograms that give multi-threading capabilities.<br /><br />
+
+<code>startThread(t)</code><br />
+Runs the subprogram t with no arguments as a single thread. Multiple threads run side-by-side in a single Mint program.<br /><br />
+
+<span class="section_title">Library random</span><br />
+The random library generates random numbers.<br /><br />
+
+<code>randomInt(a, b)</code><br />
+Returns a random integer that is greater than or equal to a and less than or equal to b.<br /><br />
+
+<code>randomReal()</code><br />
+Returns a random real number between 0.0 and 1.0, not including 1.0.<br /><br />
+
+Previous Lesson: <a href="overload.html">Operator Overloading</a><br />
+Next Lesson: <a href="obj_methods.html">Object Methods</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

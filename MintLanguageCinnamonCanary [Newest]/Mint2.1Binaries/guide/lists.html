@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Lists</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Lists</span><br />
+<span class="subtitle">A Series of Items</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Lists are Mint's main compound data structure. Lists can hold values of any type, including other lists.<br />
+
+<pre>myList = [<span class="number">1</span><span class="number">0</span>, <span class="string">"bye"</span>, <span class="string">"hi"</span>, <span class="number">1</span><span class="number">4</span>]          <span class="comment">//A list of numbers and strings</span>
+otherList = [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">1</span>, <span class="number">2</span>], [<span class="number">2</span>, <span class="number">3</span>]]    <span class="comment">//A list of lists</span></pre>
+
+To get item number X from a list, you index the list using square brackets.<br />
+
+<pre>list = [<span class="number">5</span>, <span class="number">1</span><span class="number">6</span>, <span class="number">8</span>, <span class="number">-2</span>]
+<span class="keyword">print </span>list[<span class="number">0</span>]     <span class="comment">//The first item in the list.</span>
+<span class="keyword">print </span>list[<span class="number">1</span>]     <span class="comment">//The second item in the list.</span></pre>
+
+List slots are numbered starting from zero, so list[0] is the first item, and list[1] is the second. List[2] is the third.<br /><br />
+
+You can also index lists backwards using negative numbers.<br />
+
+<pre>list = [<span class="number">5</span>, <span class="number">1</span><span class="number">6</span>, <span class="number">8</span>, <span class="number">-2</span>]
+<span class="keyword">print </span>list[<span class="number">-1</span>]     <span class="comment">//The last item in the list.</span>
+<span class="keyword">print </span>list[<span class="number">-2</span>]     <span class="comment">//The second to last item in the list.</span></pre>
+
+You can check if a list contains certain items by using the 'in' operator.<br />
+
+<pre><span class="keyword">print </span><span class="number">2</span><span class="keyword"> in </span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]    <span class="comment">//true</span>
+<span class="keyword">print </span><span class="number">5</span><span class="keyword"> in </span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>]    <span class="comment">//false</span></pre>
+
+Strings are very similar to lists, and therefore support the 'in' operator and indexing.<br />
+
+<pre><span class="keyword">print </span><span class="string">"jo"</span><span class="keyword"> in </span><span class="string">"joe"</span>    <span class="comment">//true</span>
+<span class="keyword">print </span><span class="string">"joe"</span>[<span class="number">1</span>]         <span class="comment">//gets the second character of "joe"</span></pre>
+
+To change the value of a list slot, use assignment.
+
+<pre>myList = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]
+myList[<span class="number">3</span>] = <span class="number">5</span><span class="number">0</span><span class="number">0</span><span class="number">0</span>
+<span class="keyword">print </span>myList     <span class="comment">//prints [0, 0, 0, 5000]</span></pre>
+
+There is an interesting object known as the Ellipses which you can use in lists.
+<br />
+<pre><span class="keyword">print </span>...
+<span class="keyword">import</span> type
+<span class="keyword">print </span>type(...)    <span class="comment">//Prints the string "ellipsis".</span>
+lst = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, ..., <span class="number">128</span>]
+<span class="keyword">print </span>lst[<span class="number">0</span>]    <span class="comment">//prints 1</span>
+<span class="keyword">print </span>lst[<span class="number">3</span>]    <span class="comment">//prints the list [1, 2, 3, ..., 128]</span></pre>
+
+Ellipses mean "refer to the list itself". That's why printing lst[3] prints the entire list. It is an easy way to put a list inside of itself.<br /><br />
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="more_control_flow.html">More Control Flow</a><br />
+Next Lesson: <a href="tables.html">Tables</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

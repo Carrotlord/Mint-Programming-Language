@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>First Program</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">First Program</span><br />
+<span class="subtitle">Saying Hello</span>
+</div>
+<br />
+<table class="main"><tr><td>
+The typical way to start with a programming language tutorial is with the Hello world program:<br />
+
+<pre><span class="keyword">print</span> <span class="string">"Hello world!"</span></pre>
+
+As you can see, in Mint printing Hello world! to the screen is very simple and only requires 1 line of code.<br />
+Many programming languages such as C++ and Java cannot perform the Hello world program in only 1 line. Others, such as Python and Ruby, can.<br /><br />
+
+To run this program, edit the file program.mint in your Mint directory and then double-click on the RunMint.bat batch file to execute the Mint interpreter.<br /><br />
+
+If this doesn't work, you may need to find your Java installation and edit the RunMint.bat file accordingly. Usually, Java is installed somewhere like
+<code>C:/Program Files/Java/jre7/bin/java.exe</code>. Edit the RunMint.bat file in Notepad so that it looks like this:<br />
+
+<pre>@echo off
+title Mint
+"C:/Program Files/Java/jre7/bin/java.exe" -jar Mint.jar
+echo [Program Finished.]
+pause</pre>
+
+And now your mint programs should run properly.<br /><br />
+
+To execute a Mint program that is not named program.mint, go to the command line and type:<br />
+
+<pre>"C:/Program Files/Java/jre7/bin/java.exe" -jar Mint.jar NAME_OF_FILE.mint</pre>
+
+To execute NAME_OF_FILE.mint. Make sure you cd (change directory) into the folder that contains the Mint interpreter before doing so.<br /><br />
+
+Let's write some more code:<br />
+
+<pre><span class="keyword">print</span> <span class="number">3</span><span class="number">0</span><span class="number">0</span>
+<span class="keyword">print</span> <span class="number">3</span><span class="number">6</span> * (<span class="number">8</span> + <span class="number">1</span><span class="number">4</span>)
+<span class="keyword">print</span> <span class="string">"My name is "</span> + <span class="string">"Alice."</span>
+a = <span class="number">1</span><span class="number">0</span><span class="number">0</span> / <span class="number">3</span>
+<span class="keyword">print</span> a
+b = a + <span class="number">8</span><span class="number">7</span>
+<span class="keyword">print</span> b</pre>
+
+Mint can perform mathematical operations such as 36 * (8 + 14), where * means multiplication and + means addition. Text operations are also possible,
+with + meaning 'combine these two pieces of text'.<br /><br />
+
+You are also allowed to assign variables in Mint, using the format:<br />
+
+<pre>&lt;name> = &lt;value></pre>
+
+Which assigns the value &lt;value> to a variable named &lt;name>.<br /><br />
+
+You can also use the keyword 'input' to allow the user to type in information:
+
+<pre><span class="keyword">show</span> <span class="string">"Enter your name:"</span>
+stuff = <span class="keyword">input</span>
+<span class="keyword">print</span> <span class="string">"Your name is: "</span> + stuff</pre>
+
+'show' is similar to print, except that it doesn't display a line break on the screen.<br /><br />
+
+Comments are used to provide notes and useful info about code. The interpreter ignores all comments.<br />
+There are two types of comments: line comments (that start with //) and block comments (that start with /* and end with */).<br />
+
+<pre><span class="comment">//This is a line comment.
+
+/* This is
+a block comment */</span></pre>
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="preparations.html">Preparations</a><br />
+Next Lesson: <a href="operators.html">Operators</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

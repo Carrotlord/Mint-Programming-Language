@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Data Structures</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Tables</span><br />
+<span class="subtitle">Mappings of keys to values</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Tables are the secondary data structures of Mint. A table is a mapping of keys to values. A mapping is similar to a phone book, where the phone numbers are the values and the names are the keys.
+<br />
+<pre>Joe Lunabader -> (220) 555-0888
+Bill Moonwinnower -> (221) 555-2834
+Jessica Ruby -> (221) 555-1396</pre>
+
+To make a table in Mint, you enclose comma-separated pairs inside square brackets, and surround those with curly braces.
+<br />
+<pre>myTable = {[<span class="number">17</span>, <span class="number">900</span>], [<span class="number">8</span>, <span class="number">9</span>], [<span class="string">"honey butter"</span>, <span class="string">"gelatin powder"</span>]}</pre>
+
+To grab an item from a table, use indexing.<br />
+
+<pre><span class="keyword">print</span> myTable[<span class="number">17</span>]
+<span class="keyword">print</span> [<span class="string">"honey butter"</span>]</pre>
+
+Tables are ordered collections of items, so you can also index them like this:<br />
+<pre>print myTable[<span class="number">0</span>]    <span class="comment">//Prints the first item inside the table.</span>
+print myTable[<span class="number">1</span>]    <span class="comment">//Prints the second item inside the table.</span>
+print myTable[<span class="number">8</span>]    <span class="comment">//Prints the value 9 bound to the key 8 inside the table.</span>
+</pre>
+
+To modify a table, change a certain index to a different pair.
+<br />
+<pre>myTable[<span class="number">0</span>] = [<span class="keyword">null</span>, <span class="number">0</span>]     <span class="comment">//Changes [17, 19] to [null, 0]</span>
+myTable[<span class="number">2</span>] = [[], {}]      <span class="comment">//Points an empty list to an empty table</span>
+</pre>
+
+Null is an empty object that does nothing. It's just a placeholder.<br />
+Finally, you can also make 1-dimensional tables that act exactly like lists.<br />
+<pre>tbl = {<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="string">"nuclear reactor"</span>}
+<span class="keyword">print</span> tbl[2]</pre>
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="lists.html">Lists</a><br />
+Next Lesson: <a href="data.html">Data Structures</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

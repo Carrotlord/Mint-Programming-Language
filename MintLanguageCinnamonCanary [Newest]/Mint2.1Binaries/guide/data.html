@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Data Structures</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Data Structures</span><br />
+<span class="subtitle">Containers</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Besides lists and tables, Mint supports a few more data structures.<br />
+Sets are lists that can only hold one of each element. You cannot put the number 3 in the same set twice.<br />
+
+<pre><span class="keyword">import</span> <span class="string">"data.mint"</span>
+numberSet = set()
+numberSet.add(<span class="number">2.5</span>)
+numberSet.add(<span class="number">2</span>)
+numberSet.add(<span class="number">15</span>)
+numberSet.add(<span class="number">15</span>)
+numberSet.add(<span class="number">15</span>)
+numberSet.add(<span class="number">-32</span>)
+<span class="keyword">print</span> numberSet.toString()</pre>
+
+The code above will print: {2.5, 2, 15, -32}<br /><br />
+
+Sorted lists are lists that always have an ordering, from smallest to greatest.<br />
+
+<pre><span class="keyword">import</span> <span class="string">"data.mint"</span>
+srted = sortedList()
+srted.append(<span class="number">10</span>)
+srted.append(<span class="number">5</span>)
+srted.append(<span class="number">2.5</span>)
+srted.append(<span class="number">0</span>)
+srted.append(<span class="number">1</span>)
+srted.append(<span class="number">1.75</span>)
+<span class="keyword">print</span> srted.toString()</pre>
+
+Trees are data structures that have a root and more child trees.
+
+To make the tree:<br /><pre>
+  50
+ /  \
+2    25</pre>
+
+Use:<pre><span class="keyword">import</span> <span class="string">"data.mint"</span>
+fiftyTree = tree(<span class="number">50</span>)
+a = tree(<span class="number">2</span>)
+b = tree(<span class="number">25</span>)
+fiftyTree.addChild(a)
+fiftyTree.addChild(b)
+</pre>
+
+Finally, there are subprograms that can sort lists, such
+as bubble sort and quick sort.<br />
+
+<pre><span class="keyword">import</span> <span class="string">"data.mint"</span>
+print(quickSort([<span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">-9</span>]))
+</pre>
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="tables.html">Tables</a><br />
+Next Lesson: <a href="subs.html">Subprograms</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Operators</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Operators</span><br />
+<span class="subtitle">Performing Operators on Values</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Operators perform actions on values. Here are some of them:<br /><br />
+
+<code>a + b</code> means 'a plus b'.<br />
+<code>a - b</code> means 'a minus b'.<br />
+<code>a * b</code> means 'a times b'.<br />
+<code>a / b</code> means 'a divided by b'.<br />
+<code>a ^ b</code> means 'a to the power of b'.<br />
+<code>a = b</code> means 'assign the current value of b to the variable a'.<br />
+<code>a % b</code> means 'the remainder of a divided by b'.<br /><br />
+
+Increasing or decreasing the value of an existing variable is simple. Assign the variable to itself, plus or minus something else.<br />
+
+<pre>a = <span class="number">500</span>
+a = a + <span class="number">100</span>     <span class="comment">//a is now 600.</span>
+a = a - <span class="number">250</span>     <span class="comment">//a is now 350.</span>
+b = <span class="string">"Hey "</span>
+b = b + <span class="string">" you"</span>  <span class="comment">//b is now "Hey you"</span></pre>
+
+There are various shorthand operators for doing this:<br /><br />
+
+<code>a += b</code> means <code>a = a + b</code>.<br />
+<code>a -= b</code> means <code>a = a - b</code>.<br />
+<code>a *= b</code> means <code>a = a * b</code>.<br />
+<code>a /= b</code> means <code>a = a / b</code>.<br />
+<code>a ^= b</code> means <code>a = a ^ b</code>.<br />
+<code>a %= b</code> means <code>a = a % b</code>.<br /><br />
+
+++ increases a variable by 1, and -- decreases a variable by 1. Make sure you put these operators after the variable.<br />
+
+<pre>num = <span class="number">60</span>
+num++    <span class="comment">//num is now 61.</span>
+num--    <span class="comment">//num is now 60.</span></pre>
+
+'true' and 'false' are two truth values that can be used in Mint. Their purpose will become more clear when we get into control flow.<br /><br />
+
+<code>a == b</code> checks if a is equal to b. The reason == is used instead of = is because = is already used for variable assignment.<br />
+<code>a != b</code> checks if a is not equal to b.<br />
+<code>a > b</code> checks if a is greater than b.<br />
+<code>a &lt; b</code> checks if a is less than b.<br />
+<code>a >= b</code> checks if a is greater than or equal to b.<br />
+<code>a &lt;= b</code> checks if a is less than or equal to b.<br />
+<code>a in b</code> checks if b contains a.<br /><br />
+
+Here are some examples:<br />
+
+<pre>a = <span class="number">1</span><span class="number">5</span>
+<span class="keyword">print</span> a == <span class="number">1</span><span class="number">5</span>             <span class="comment">//prints true</span>
+<span class="keyword">print</span> a > <span class="number">0</span>               <span class="comment">//prints true</span>
+<span class="keyword">print</span> a < <span class="number">2</span>               <span class="comment">//prints false</span>
+b = <span class="number">3</span><span class="number">0</span>
+<span class="keyword">print</span> a > b               <span class="comment">//prints false</span>
+<span class="keyword">print</span> a >= b - <span class="number">1</span><span class="number">5</span>         <span class="comment">//prints true</span>
+c = <span class="string">"hello"</span>
+<span class="keyword">print</span> <span class="string">"ello"</span><span class="keyword"> in </span><span class="string">"hello"</span>   <span class="comment">//prints true</span>
+<span class="keyword">print</span> <span class="string">"z"</span><span class="keyword"> in </span><span class="string">"hello"</span>      <span class="comment">//prints false</span></pre>
+
+There are also operators that work on truth values:<br /><br />
+
+<code>a and b</code> checks if a and b are both true.<br />
+<code>a or b</code> checks if a or b are true.<br />
+<code>a xor b</code> checks if either a is true or b is true, but not both of them.<br />
+<code>not a</code> returns false if a is true, and true if a is false.<br />
+
+<pre>a = <span class="number">2</span><span class="number">0</span><span class="number">0</span><span class="number">0</span>
+b = <span class="number">2</span><span class="number">1</span><span class="number">0</span><span class="number">0</span>
+<span class="keyword">print</span> a == <span class="number">2</span><span class="number">0</span><span class="number">0</span><span class="number">0</span> <span class="keyword">and</span> b > <span class="number">1</span><span class="number">0</span><span class="number">0</span><span class="number">0</span>    <span class="comment">//true</span>
+<span class="keyword">print</span> a != <span class="number">2</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="keyword"> or </span>b == <span class="number">2</span><span class="number">1</span><span class="number">0</span><span class="number">0</span>    <span class="comment">//true</span>
+<span class="keyword">print</span> a != <span class="number">2</span><span class="number">0</span><span class="number">0</span><span class="number">0</span> <span class="keyword">and</span> b == <span class="number">2</span><span class="number">1</span><span class="number">0</span><span class="number">0</span>   <span class="comment">//false</span>
+<span class="keyword">print</span> a > <span class="number">1</span><span class="number">0</span><span class="number">0</span><span class="number">0</span> <span class="keyword">xor</span> b < <span class="number">1</span><span class="number">0</span><span class="number">0</span><span class="number">0</span>     <span class="comment">//true</span>
+<span class="keyword">print</span> <span class="keyword">not</span> (a == <span class="number">2</span><span class="number">0</span><span class="number">0</span><span class="number">0</span>)           <span class="comment">//false</span></pre>
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="first_program.html">First Program</a><br />
+Next Lesson: <a href="basic_control_flow.html">Basic Control Flow</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />
