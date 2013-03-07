@@ -1,0 +1,144 @@
+OrgVersion = 2
+Tempo = 128
+TimeSignature = 4/4
+StartingMeasure = 0
+EndingMeasure = 255
+StartingBeat = 0
+EndingBeat = 4080
+Frequency1 = 1000
+Frequency2 = 1000
+Frequency3 = 1000
+Frequency4 = 1000
+Frequency5 = 1000
+Frequency6 = 1000
+Frequency7 = 1000
+Frequency8 = 1000
+Frequency9 = 1000
+Frequency10 = 1000
+Frequency11 = 1000
+Frequency12 = 1000
+Frequency13 = 1000
+Frequency14 = 1000
+Frequency15 = 1000
+Frequency16 = 1000
+Instrument1 = 0
+Instrument2 = 0
+Instrument3 = 0
+Instrument4 = 0
+Instrument5 = 0
+Instrument6 = 0
+Instrument7 = 0
+Instrument8 = 0
+Instrument9 = 0
+Instrument10 = 0
+Instrument11 = 0
+Instrument12 = 0
+Instrument13 = 0
+Instrument14 = 0
+Instrument15 = 0
+Instrument16 = 0
+Pi1 = false
+Pi2 = false
+Pi3 = false
+Pi4 = false
+Pi5 = false
+Pi6 = false
+Pi7 = false
+Pi8 = false
+Pi9 = false
+Pi10 = false
+Pi11 = false
+Pi12 = false
+Pi13 = false
+Pi14 = false
+Pi15 = false
+Pi16 = false
+
+track {
+E3 : 8 : 200 : 6
+A2 : 8 : 200 : 6
+E2 : 8 : 200 : 6
+E2 : 8 : 200 : 6
+D3 : 8 : 200 : 6
+D3 : 8 : 200 : 6
+D3 : 8 : 200 : 6
+F3 : 8 : 200 : 6
+}
+
+track {
+A2 : 8 : 200 : 6
+C3 : 8 : 200 : 6
+G2 : 8 : 200 : 6
+G2 : 8 : 200 : 6
+B2 : 8 : 200 : 6
+B2 : 8 : 200 : 6
+F3 : 8 : 200 : 6
+D3 : 8 : 200 : 6
+}
+
+track {
+C3 : 8 : 200 : 6
+E3 : 8 : 200 : 6
+B2 : 8 : 200 : 6
+B2 : 8 : 200 : 6
+F#3 : 8 : 200 : 6
+F#3 : 8 : 200 : 6
+Bb2 : 8 : 200 : 6
+Bb2 : 8 : 200 : 6
+}
+
+track {
+E4 : 4 : 120 : 6
+B3 : 4 : 124 : 6
+D4 : 4 : 120 : 6
+A3 : 4 : 124 : 6
+B3 : 4 : 120 : 6
+F#3 : 4 : 120 : 6
+A3 : 4 : 124 : 6
+E3 : 4 : 124 : 6
+F#3 : 4 : 116 : 6
+D3 : 4 : 120 : 6
+E3 : 4 : 116 : 6
+B2 : 4 : 120 : 6
+D3 : 4 : 120 : 6
+Bb2 : 4 : 124 : 6
+C3 : 4 : 124 : 6
+Bb2 : 4 : 120 : 0
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
+track {
+}
+
