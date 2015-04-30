@@ -5,7 +5,7 @@ package mint;
  * indicate an actual bug in the program.
  * @author Jiangcheng Oliver Chu
  */
-public class InternalException extends Exception {
+public class InternalException extends MintException {
     public InternalException(String message) {
         super(message);
     }

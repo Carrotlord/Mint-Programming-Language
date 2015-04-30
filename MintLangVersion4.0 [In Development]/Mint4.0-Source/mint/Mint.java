@@ -17,7 +17,17 @@ public class Mint {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        reportMaxHeapSizes();
         runTests();
+    }
+    
+    public static void reportMaxHeapSizes() {
+        println(SuccessorVirtualMachine.reportMaximumHeapSize(
+                SuccessorVirtualMachine.LINEAR_GROWTH, 2048));
+        println(SuccessorVirtualMachine.reportMaximumHeapSize(
+                SuccessorVirtualMachine.QUADRATIC_GROWTH, 2048));
+        println(SuccessorVirtualMachine.reportMaximumHeapSize(
+                SuccessorVirtualMachine.EXPONENTIAL_GROWTH, 2047));
     }
     
     private static void runTests() {
