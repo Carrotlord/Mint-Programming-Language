@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Imports</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Imports</span><br />
+<span class="subtitle">Using Libraries</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Import statements allow you to import libraries of code. These libraries make available subprograms that do very useful things, such as
+opening a web browser:
+
+<pre><span class="keyword">import</span> web
+
+openWebBrowser(<span class="string">"www.google.com"</span>)</pre>
+
+There's also the import into statement. This allows you to import a library's variables and subprograms into an object.
+
+<pre><span class="keyword">import</span> math <span class="keyword">into</span> m
+
+<span class="keyword">print </span>m              <span class="comment">//Prints the object m, so you can see all variables and subprograms inside it.</span>
+<span class="keyword">print </span>m.sin(m.pi)    <span class="comment">//The sine of pi, which is 0 (Mint prints an approximation to 0).</span></pre>
+
+You can also import other Mint files using the import statement. For example, pretend that we put the complex number subprogram from the Objects lesson
+into a file called "complex.mint". You could then import the subprogram by doing:<br />
+
+<pre><span class="keyword">import</span> <span class="string">"complex.mint"</span></pre>
+
+Here's a list of all built-in libraries that you can import:<br />
+
+<pre>operator
+math
+type
+time
+system
+file
+web
+mint
+graphics
+thread
+random
+compress
+programming
+data.mint</pre>
+
+For the last one, use <code><span class="keyword">import</span> <span class="string">"data.mint"</span></code>.
+<br /><br />
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="mem.html">Memory Management</a><br />
+Next Lesson: <a href="overload.html">Operator Overloading</a><br />
+
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

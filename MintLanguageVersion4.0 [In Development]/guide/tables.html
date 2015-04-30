@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Data Structures</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Tables</span><br />
+<span class="subtitle">Mappings of keys to values</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Tables are the secondary data structures of Mint. A table is a mapping of keys to values, known as a hashmap in some other languages. A mapping is similar to a phone book, where the phone numbers are the values and the names are the keys.
+<br /><br />
+<table class="simple">
+<tr><th class="simple_th">Key</th><th class="simple_th">Value</th></tr>
+<tr><td class="simple_td">Joe Smith</td><td class="simple_td">(220) 555-0888</td></tr>
+<tr><td class="simple_td">Bill Richardson</td><td class="simple_td">(221) 555-2834</td></tr>
+<tr><td class="simple_td">Jessica Russell</td><td class="simple_td">(221) 555-1396</td></tr>
+</table>
+<br />
+To make a table in Mint, you use comma-separated pairs separated with vertical bars, and surround those with curly braces.
+<br />
+<pre>myTable = {<span class="number">17</span>, <span class="number">900</span> | <span class="number">8</span>, <span class="number">9</span> | <span class="string">"honey butter"</span>, <span class="string">"gelatin powder"</span>}
+phoneNumbers = {<span class="string">"Joe Smith"</span>, <span class="string">"(220) 555-0888"</span> | <span class="string">"Bill Richardson"</span>, <span class="string">"(221) 555-2834"</span> | <span class="string">"Jessica Russell"</span>, <span class="string">"(221) 555-1396"</span>}</pre>
+
+To grab an item from a table, use indexing.<br />
+
+<pre><span class="keyword">print</span> myTable[<span class="number">17</span>]                        <span class="comment">//900</span>
+<span class="keyword">print</span> myTable[<span class="string">"honey butter"</span>]            <span class="comment">//gelatin powder</span>
+<span class="keyword">print</span> phoneNumbers[<span class="string">"Bill Richardson"</span>]    <span class="comment">//(221) 555-2834</span></pre>
+
+Tables are also ordered collections of pairs, so you can select pairs like this:<br />
+<pre><span class="keyword">print</span> myTable.getPair(<span class="number">0</span>)          <span class="comment">//Prints [17, 900]</span>
+<span class="keyword">print</span> myTable.getPair(<span class="number">1</span>)          <span class="comment">//Prints [8, 9]</span>
+<span class="keyword">print</span> phoneNumbers.getPair(<span class="number">-1</span>)    <span class="comment">//Prints the final pair ["Jessica Russell", "(221) 555-1396"]</span>
+</pre>
+
+Pairs are just lists of exactly 2 items.<br />
+To modify a table, use indexing or use setPair.
+<br />
+<pre>myTable[<span class="number">0</span>] = <span class="keyword">null</span>    <span class="comment">//Binds 0 to null</span>
+myTable[<span class="string">"coffee"</span>] = <span class="string">"16 oz"</span>    <span class="comment">//Binds "coffee" to "16 oz"</span>
+myTable.setPair(<span class="string">"coffee"</span>, <span class="string">"16 oz"</span>)   <span class="comment">//Equivalent to previous line. Does not create a duplicate for "coffee".</span>
+<span class="keyword">print</span> myTable    <span class="comment">//Prints {17, 900 | 8, 9 | "honey butter", "gelatin powder" | 0, null | "coffee", "16 oz"}</span>
+<span class="keyword">print</span> myTable[<span class="string">"coffee"</span>]    <span class="comment">//Prints "16 oz"</span>
+<span class="keyword">print</span> myTable.getPair(-1)    <span class="comment">//Prints ["coffee", "16 oz"]</span></pre>
+
+The keyword known as <code>null</code> is an empty object that does nothing. It's just a placeholder.<br />
+
+Vertical bar notation actually wraps comma-separated values in individual lists. It can be used outside of tables to easily create nested lists.<br />
+
+<pre>myList = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> | <span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span> | <span class="number">1</span>, <span class="number">8</span>, <span class="number">27</span>]
+<span class="keyword">print</span> myList     <span class="comment">//Prints [[1, 2, 3], [1, 4, 9], [1, 8, 27]]</span></pre>
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="lists.html">Lists</a><br />
+Next Lesson: <a href="data.html">Data Structures</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

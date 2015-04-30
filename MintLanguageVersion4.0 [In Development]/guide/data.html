@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Data Structures</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Data Structures</span><br />
+<span class="subtitle">Containers</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Besides lists and tables, Mint supports a few more data structures.<br /><br />
+
+<span class="section_title">Sets</span><br />
+Sets are lists that can only hold one of each unique element. For instance, you cannot put the number 3 in the same set twice.<br />
+
+<pre>someNumbers = Set{<span class="number">2.5</span>, <span class="number">2</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">-32</span>}
+<span class="keyword">print</span> someNumbers</pre>
+
+The code above will print: <code>Set{2.5, 2, 15, -32}</code><br />
+For efficiency reasons, sets may reorder their items in any way. Sets are most useful with the <code>in</code> operator, which returns <code>true</code> if an item is contained in the set, and <code>false</code> otherwise.<br />
+
+<pre>someNumbers = Set{<span class="number">2.5</span>, <span class="number">2</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">15</span>, <span class="number">-32</span>}
+<span class="keyword">print</span> <span class="number">2.5</span> <span class="keyword">in</span> someNumbers    <span class="comment">//Is 2.5 in the set? True.</span>
+<span class="keyword">print</span> <span class="number">-33</span> <span class="keyword">in</span> someNumbers    <span class="comment">//Is -33 in the set? False.</span>
+<span class="keyword">print</span> <span class="string">"frog"</span> <span class="keyword">in</span> someNumbers    <span class="comment">//Is "frog" in the set? False.</span>
+<span class="keyword">print not</span> (<span class="number">3.5</span> <span class="keyword">in</span> someNumbers)    <span class="comment">//Does the set not contain 3.5? True.</span></pre>
+
+<span class="section_title">Sorted Lists</span><br />
+Sorted lists are lists that always maintain an ordering, from smallest to greatest, including when items are removed or added from the list after it is created.<br />
+
+<pre>srted = Sorted[<span class="number">10</span>, <span class="number">5</span>, <span class="number">2.5</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1.75</span>]
+<span class="keyword">print</span> srted    <span class="comment">//Prints Sorted[0, 1, 1.75, 2.5, 5, 10]</span></pre>
+
+<span class="section_title">Matrices</span><br />
+A matrix is a 2-dimensional array of items used for various calculations such as matrix multiplication. A 1-dimensional matrix is considered a vector.<br />
+
+<pre>myMatrix = Matrix[<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> | <span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span> | <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>]
+otherMatrix = Matrix[<span class="number">2</span>, <span class="number">5</span>, <span class="number">3</span> | <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span> | <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]
+product = myMatrix * otherMatrix
+<span class="keyword">print</span> product         <span class="comment">//Prints Matrix[9, 10, 11 | 6, 7, 8 | 2, 5, 3]</span>
+vector = Matrix[<span class="number">60</span>, <span class="number">80.25</span>, <span class="number">101.9</span>]
+vector2 = Matrix[<span class="number">9</span>, <span class="number">-18</span>, <span class="number">-55</span>]
+dotProduct = vector.dot(vector2)
+crossProduct = vector.cross(vector2)
+<span class="keyword">print</span> dotProduct      <span class="comment">//Prints -6509.0</span>
+<span class="keyword">print</span> crossProduct    <span class="comment">//Prints Matrix[-2579.55, 4217.1, -1802.25]</span></pre>
+
+<span class="section_title">Trees</span><br />
+Trees are data structures that have a root and more child trees.
+
+To make the tree:<br /><pre>
+  50
+ /  \
+2    25</pre>
+
+Use:<pre>myTree = Tree(<span class="number">50</span>)
+a = Tree(<span class="number">2</span>)
+b = Tree(<span class="number">25</span>)
+myTree.addChild(a)
+myTree.addChild(b)
+<span class="keyword">print</span> myTree    <span class="comment">//Prints Tree(50, Tree(2), Tree(25))</span></pre>
+
+Trees can also be constructed in this manner:<br />
+<pre>familyTree = Tree(<span class="string">"parents"</span>, Tree([<span class="string">"son"</span>, <span class="string">"wife"</span>], Tree(<span class="string">"grandchildren"</span>)), Tree([<span class="string">"daughter"</span>, <span class="string">"husband"</span>], Tree(<span class="string">"grandchildren"</span>)))</pre>
+
+The second tree (<code>familyTree</code>) represents the following structure:<br /><pre>
+            parents
+           /       \
+ wife - son         daughter - husband
+      |                      |
+grandchildren          grandchildren</pre>
+
+Which can be interpreted as two parents with a son and a daughter. Both of the parents' children are married, and they also have grandchildren.
+<br /><br />
+
+<span class="section_title">Graphs</span><br />
+Graphs are collections of nodes and edges. A tree is a special type of a graph. A graph is constructed with the same syntax as a table, representing all the edges in the graph and each pair of nodes that each edge connects. For graphs, it is perfectly valid to have duplicate keys with different values.
+
+<pre>g = Graph{<span class="string">"A"</span>, <span class="string">"B"</span> | <span class="string">"B"</span>, <span class="string">"C"</span> | <span class="string">"C"</span>, <span class="string">"D"</span> | <span class="string">"D"</span>, <span class="string">"E"</span> | <span class="string">"D"</span>, <span class="string">"A"</span> | <span class="string">"A"</span>, <span class="string">"C"</span>}</pre>
+
+Represents:
+<pre>     A
+   / | \
+  B  |  D - E
+   \ | /
+     C</pre>
+
+<span class="section_title">Sorting Functions</span><br />
+Finally, there are subprograms that can sort lists, such as merge sort and quick sort.<br />
+
+<pre><span class="keyword">import</span> sort
+<span class="keyword">print</span> quickSort([<span class="number">9</span>, <span class="number">8</span>, <span class="number">7</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">-9</span>])
+</pre>
+
+<span class="section_title">Strings &amp; Lists</span><br />
+Let us talk a bit more about regular strings and lists.<br /><br />
+
+One interesting thing about lists...<br />
+If a subprogram takes in exactly one list as an argument,<br />
+you can omit the parentheses that call the subprogram:<br />
+
+<pre><span class="keyword">import</span> sort
+quickSort[<span class="number">900</span>, <span class="number">-4</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">20</span>, <span class="number">28</span>, <span class="number">9</span>, <span class="number">-450</span>, <span class="number">1000</span>, <span class="number">200</span>, <span class="number">256</span>, <span class="number">1024</span>]</pre>
+
+To remove items from a list, use subtraction.<br />
+
+<pre>femaleNames = [<span class="string">"Alice"</span>, <span class="string">"Jenny"</span>, <span class="string">"Jane"</span>, <span class="string">"Beth"</span>, <span class="string">"Sophia"</span>]
+femaleNames = femaleNames - [<span class="string">"Jane"</span>, <span class="string">"Alice"</span>]
+<span class="keyword">print</span> femaleNames    <span class="comment">// Prints ["Jenny", "Beth", "Sophia"]</span></pre>
+
+To reverse a string, just make it a negative string by putting a negative sign in front of it.<br />
+
+<pre>someText = <span class="string">"indefinite integral"</span>
+backwards = -someText
+<span class="keyword">print</span> backwards</pre>
+
+The above code will print the reversed string "largetni etinifedni".
+<br />
+The <code>or</code> operator on strings can be used to alphabetize strings.<br /><br />
+
+The expression <code>A or B</code> will return A if A contains a string<br />
+that is alphabetically before B, and will return B otherwise.<br />
+
+<pre><span class="comment">/* If we alphabetize these words,
+ * you get "what", "whence", "where", and "whoa"
+ * The following statement prints "what", which is
+ * the first word that comes alphabetically in this list
+ * of 4 words.
+ */</span>
+<span class="keyword">print</span> <span class="string">"whence"</span> <span class="keyword">or</span> <span class="string">"where"</span> <span class="keyword">or</span> <span class="string">"what"</span> <span class="keyword">or</span> <span class="string">"whoa"</span></pre>
+
+Strings can be compared by their <em>lengths</em> using the &lt;, &gt;, &lt;=, and &gt;= operators.<br />
+
+<pre><span class="keyword">if</span> thisString &gt; thatString
+    <span class="comment">// This clause will only be executed if and only
+    // if thisString has a greater length
+    // than thatString.</span>
+<span class="keyword">end</span>
+<span class="keyword">import</span> sort
+<span class="comment">// The following line will sort strings by length,
+// and therefore it will display:
+// ["tiny", "mouse", "tigress", "elephant"]
+// onto the screen.</span>
+<span class="keyword">print</span> quickSort[<span class="string">"elephant"</span>, <span class="string">"tiny"</span>, <span class="string">"mouse"</span>, <span class="string">"tigress"</span>]</pre>
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="tables.html">Tables</a><br />
+Next Lesson: <a href="subs.html">Subprograms</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

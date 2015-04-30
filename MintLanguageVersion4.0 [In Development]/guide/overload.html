@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Overloading</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Overloading</span><br />
+<span class="subtitle">Defining Custom Operator Behavior</span>
+</div>
+<br />
+<table class="main"><tr><td>
+In languages like Java, you cannot change how operators work, with minor
+exceptions like the obj.toString() method.<br /><br />
+
+In C++, you can change the behavior of operators.<br /><br />
+
+In Mint you can do the same. In the file overload.mint, which should<br />
+be in the same folder as the Mint JAR file, you can edit<br />
+some subprograms to let primitive Mint operators perform<br />
+special actions on objects.<br /><br />
+
+Assume you have the following class-like subprograms:<br />
+
+<pre><span class="keyword">sub</span> Vector(x0, y0)
+    type = <span class="string">"vect"</span>
+    horizCoord = x0
+    vertCoord = y0
+    <span class="keyword">return this</span>
+<span class="keyword">end</span>
+
+<span class="keyword">sub</span> Sphere(radius)
+    type = <span class="string">"sphere"</span>
+    r = radius
+    <span class="keyword">return this</span>
+<span class="keyword">end</span>
+
+<span class="keyword">sub</span> Number(value)
+    type = <span class="string">"number"</span>
+    val = value
+    <span class="keyword">return this</span>
+<span class="keyword">end</span>
+
+vec0 = Vector(<span class="number">7</span>, <span class="number">4</span>)
+vec1 = Vector(<span class="number">15</span>, <span class="number">-5</span>)
+sphere0 = Sphere(<span class="number">60</span>)
+<span class="keyword">print</span> vec0 + vec1
+<span class="keyword">print</span> sphere0 * Number(<span class="number">3</span>)</pre>
+
+In the overload.mint file, you define:
+
+<pre><span class="keyword">sub</span> plus(x, y)
+    <span class="keyword">when</span> x.type == <span class="string">"vect"</span>
+        <span class="keyword">return</span> [x.horizCoord + y.horizCoord, x.vertCoord + y.vertCoord]
+<span class="keyword">end</span>
+
+<span class="keyword">sub</span> times(x, y)
+    <span class="keyword">when</span> x.type == "sphere" and y.type == <span class="string">"number"</span>
+        <span class="keyword">return</span> [x.r * y.val]
+<span class="keyword">end</span></pre>
+
+Running program.mint will print [22, -1] and then [180].<br />
+The code emulates the addition of vectors and inflating a sphere with some atmospheric gas.
+
+<br /><br />
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="imports.html">Imports</a><br />
+Next Lesson: <a href="docs.html">Documentation</a><br />
+
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />

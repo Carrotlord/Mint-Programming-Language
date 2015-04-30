@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+<title>Basic Control Flow</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Basic Control Flow</span><br />
+<span class="subtitle">Conditional Jumps</span>
+</div>
+<br />
+<table class="main"><tr><td>
+Important: It is now time to start putting code in your own .mint files. You will find that the interactive interpreter doesn't handle multi-line control flow structures.<br /><br />
+
+The when statement is the simplest of the control flow statements.<br />
+When a when statement's condition is true, it executes the next line. Otherwise it skips the next line.<br />
+If you have ever used the languages Java, C, or C++, you should know that a Mint<br />
+when statement is equivalent to an <span class="italic">if statement with no curly braces</span> in any of those languages.<br />
+
+<pre>a = <span class="number">-154</span>
+<span class="keyword">when</span> a < <span class="number">0</span>
+    <span class="keyword">print </span><span class="string">"a is less than 0."</span>        <span class="comment">//Will be printed.</span>
+<span class="keyword">when</span> a > <span class="number">0</span>
+    <span class="keyword">print </span><span class="string">"a is greater than 0."</span>     <span class="comment">//Won't be printed.</span></pre>
+
+The if statement is the cousin to the when statement. When an if statement begins, it opens a clause.<br />
+A clause must be closed with an end statement. If the if statement's condition is true, it executes the clause.<br />
+Otherwise, the clause is ignored.<br />
+For Java, C, and C++, the Mint if statement and its corresponding end statement is the same as an <span class="italic">if statement that does have curly braces</span>.<br />
+
+<pre>a = <span class="number">2</span><span class="number">0</span><span class="number">0</span>
+b = <span class="number">3</span><span class="number">0</span><span class="number">0</span>
+<span class="keyword">if</span> a == <span class="number">2</span><span class="number">0</span><span class="number">0</span> <span class="keyword">and</span> b == <span class="number">3</span><span class="number">0</span><span class="number">0</span>
+    <span class="keyword">show</span> <span class="string">"a is two hundred and"</span>     <span class="comment">//This clause will be executed.</span>
+    <span class="keyword">print </span><span class="string">" b is three hundred."</span>
+<span class="keyword">end</span>
+a *= <span class="number">2</span>
+b *= <span class="number">2</span>
+<span class="keyword">if</span> a == <span class="number">5</span><span class="number">0</span><span class="number">0</span> <span class="keyword">and</span> b == <span class="number">6</span><span class="number">0</span><span class="number">0</span>
+    <span class="keyword">show</span> <span class="string">"a is five hundred and"</span>    <span class="comment">//This clause won't be executed.</span>
+    <span class="keyword">print </span><span class="string">" b is six hundred."</span>
+<span class="keyword">end</span></pre>
+
+If statements can take an optional else clause, which executes in the event that the if statement is false.<br />
+
+<pre><span class="keyword">show</span> <span class="string">"What is your name? "</span>
+name = <span class="keyword">input</span>
+<span class="keyword">if</span> name == <span class="string">"Jack"</span>
+    <span class="keyword">print </span><span class="string">"Hello, Jack!"</span>
+<span class="keyword">else</span>
+    <span class="keyword">print </span><span class="string">"Who are you?"</span>
+<span class="keyword">end</span></pre>
+
+There's also a thing called the if ... else if ... else statement which represents a chain of if statements:<br />
+
+<pre><span class="keyword">import</span> time
+
+today = weekdayNumber()
+<span class="keyword">if</span> today == <span class="number">0</span>
+    <span class="keyword">print </span><span class="string">"Sunday"</span>
+<span class="keyword">else</span> <span class="keyword">if</span> today == <span class="number">1</span>
+    <span class="keyword">print </span><span class="string">"Monday"</span>
+<span class="keyword">else</span> <span class="keyword">if</span> today == <span class="number">2</span>
+    <span class="keyword">print </span><span class="string">"Tuesday"</span>
+<span class="keyword">else</span> <span class="keyword">if</span> today == <span class="number">3</span>
+    <span class="keyword">print </span><span class="string">"Wednesday"</span>
+<span class="keyword">else</span> <span class="keyword">if</span> today == <span class="number">4</span>
+    <span class="keyword">print </span><span class="string">"Thursday"</span>
+<span class="keyword">else</span> <span class="keyword">if</span> today == <span class="number">5</span>
+    <span class="keyword">print </span><span class="string">"Friday"</span>
+<span class="keyword">else</span>
+    <span class="keyword">print </span><span class="string">"Saturday"</span>
+<span class="keyword">end</span></pre>
+
+The above if ... else if ... else statement will print the current day of week.<br />
+Notice that we did 'import time', which imports a library known as time into the current scope.<br />
+This allows us to call the subprogram weekdayNumber and get the current day<br />
+of the week as a number. There will be more info about subprograms later.<br /><br />
+
+<span class="nav">Navigation</span><br />
+Previous Lesson: <a href="operators.html">Operators</a><br />
+Next Lesson: <a href="more_control_flow.html">More Control Flow</a><br />
+<a href="toc.html">Table of Contents</a>
+</td></tr></table>
+<br /><br /><br />
