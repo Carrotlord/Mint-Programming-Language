@@ -14,6 +14,12 @@ public class SuccessorVirtualMachine {
     private int initialSlots;
     private char growthRate;
     private int latestActiveSegment;
+    private int[] intRegs;
+    private double[] doubleRegs;
+    private String[] stringRegs;
+    private MintObject[] mintObjRegs;
+    private int[] program;
+    private boolean isHalted;
     
     public static final char LINEAR_GROWTH = 0;
     public static final char QUADRATIC_GROWTH = 1;
@@ -23,13 +29,23 @@ public class SuccessorVirtualMachine {
     private static final char DEFAULT_SLOTS = 2048;
     private static final char DEFAULT_GROWTH = EXPONENTIAL_GROWTH;
     
-    public SuccessorVirtualMachine() throws InternalException {
-        this(DEFAULT_SEGMENTS, DEFAULT_SLOTS, DEFAULT_GROWTH);
+    private static final int NUM_REGISTERS = 64;
+    
+    public static final int EXIT_SUCCESS = 0;
+    public static final int EXIT_EOF = -1;
+    public static final int EXIT_FAILURE = 1;
+    
+    public SuccessorVirtualMachine(int[] bytecode) throws InternalException {
+        this(bytecode, DEFAULT_SEGMENTS, DEFAULT_SLOTS, DEFAULT_GROWTH);
     }
     
-    public SuccessorVirtualMachine(int segments, int slots,
+    public SuccessorVirtualMachine(int[] bytecode, int segments, int slots,
                                    char growth) throws InternalException {
         checkInitialConditions(segments, slots, growth);
+        if ((program.length & 1) == 1) {
+            throw new InternalException("Program length is " + program.length +
+                                        ", number of words should be even.");
+        }
         numSegments = segments;
         initialSlots = slots;
         growthRate = growth;
@@ -41,6 +57,112 @@ public class SuccessorVirtualMachine {
         doubleHeapSegments[0] = new double[initialSlots];
         stringHeapSegments[0] = new String[initialSlots];
         mintObjHeapSegments[0] = new MintObject[initialSlots];
+        intRegs = new int[NUM_REGISTERS];
+        doubleRegs = new double[NUM_REGISTERS];
+        stringRegs = new String[NUM_REGISTERS];
+        mintObjRegs = new MintObject[NUM_REGISTERS];
+        program = bytecode;
+        isHalted = false;
+    }
+    
+    public int execute() {
+        for (int ip = 0; ip < program.length;) {
+            int command = program[ip];
+            int constant = program[ip + 1];
+            int type = command >>> 30;
+            int opcode = (command & 0x3ff80000) >>> 19;
+            int rA = (command & 0xfc0) >> 6;
+            int rB = command & 0x3f;
+            int rC = (command & 0x3f000) >> 12;
+            /* For efficiency reasons, avoid external method calls in
+             * the following switch. */
+            switch (type) {
+            case Mnemonics.INT:
+                switch (opcode) {
+                case Mnemonics.MOV:
+                    intRegs[rA] = intRegs[rB] + constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.ADD:
+                    intRegs[rA] += intRegs[rB] + constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.SUB:
+                    intRegs[rA] -= intRegs[rB] + constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.MUL:
+                    intRegs[rA] *= intRegs[rB] + constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.DIV:
+                    intRegs[rA] /= intRegs[rB] + constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.MOD:
+                    intRegs[rA] %= intRegs[rB] + constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.AND:
+                    intRegs[rA] &= intRegs[rB] | constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.OR:
+                    intRegs[rA] |= intRegs[rB] | constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.XOR:
+                    intRegs[rA] ^= intRegs[rB] ^ constant;
+                    ip += 2;
+                    break;
+                case Mnemonics.J:
+                    ip = constant << 1;
+                    break;
+                case Mnemonics.JMP:
+                    ip = intRegs[rA] << 1;
+                    break;
+                case Mnemonics.JEQ:
+                    ip = intRegs[rA] == intRegs[rB] ? constant << 1 : ip;
+                    break;
+                case Mnemonics.JNE:
+                    ip = intRegs[rA] != intRegs[rB] ? constant << 1 : ip;
+                    break;
+                case Mnemonics.JGE:
+                    ip = intRegs[rA] >= intRegs[rB] ? constant << 1 : ip;
+                    break;
+                case Mnemonics.JG:
+                    ip = intRegs[rA] > intRegs[rB] ? constant << 1 : ip;
+                    break;
+                case Mnemonics.JLE:
+                    ip = intRegs[rA] <= intRegs[rB] ? constant << 1 : ip;
+                    break;
+                case Mnemonics.JL:
+                    ip = intRegs[rA] < intRegs[rB] ? constant << 1 : ip;
+                    break;
+                case Mnemonics.SYSCALL:
+                    /* The following should be changed for other types of
+                     * syscalls. */
+                    return EXIT_SUCCESS;
+                default:
+                    return EXIT_FAILURE;
+                }
+                break;
+            case Mnemonics.DBL:
+                break;
+            case Mnemonics.STR:
+                break;
+            case Mnemonics.MINTOBJ:
+                break;
+            default:
+                return EXIT_FAILURE;
+            }
+            // TODO: finish this method
+        }
+        return EXIT_EOF;
+    }
+    
+    public String inspectState() {
+        return null;
     }
     
     public void writeInt(int i, int address) {
@@ -160,10 +282,6 @@ public class SuccessorVirtualMachine {
     }
     
     private static boolean multiplyOverflows(int a, int b) {
-        if (a == 0) {
-            return false;
-        } else {
-            return b > Integer.MAX_VALUE / a;
-        }
+        return a != 0 && (b > Integer.MAX_VALUE / a);
     }
 }
