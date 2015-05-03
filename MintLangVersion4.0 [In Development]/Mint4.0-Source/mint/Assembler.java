@@ -14,6 +14,7 @@ public class Assembler {
     private static final Pattern CONSTANT_PATTERN = Pattern.compile(
                                                  "^-?(\\d+|0x\\d+)$");
     public static final String SUCCESSOR_NOP = "i shlv rZERO, rZERO, 0\n";
+    public static final String SUCCESSOR_EXIT = "i syscall r0, rZERO, 0";
     private String[] sourceCodeLines;
     private int[][] programByteCode;
     

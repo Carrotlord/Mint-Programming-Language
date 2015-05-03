@@ -11,13 +11,13 @@ import test.*;
  */
 public class Mint {
     public static final BufferedReader KEYBOARD =
-         new BufferedReader(new InputStreamReader(System.in));
+        new BufferedReader(new InputStreamReader(System.in));
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        reportMaxHeapSizes();
+        //reportMaxHeapSizes();
         runTests();
     }
     
@@ -31,7 +31,7 @@ public class Mint {
     }
     
     private static void runTests() {
-        TestGroup[] allTests = {new AssemblerTests()};
+        TestGroup[] allTests = {new AssemblerTests(), new SuccessorTests()};
         (new TestRunner(allTests)).runTests();
     }
     
@@ -40,6 +40,10 @@ public class Mint {
      */
     public static void println(Object o) {
         System.out.println(o);
+    }
+    
+    public static void print(Object o) {
+        System.out.print(o);
     }
     
     public static void printerr(Object o) {
@@ -56,5 +60,9 @@ public class Mint {
     
     public static void debugln(Object o) {
         System.out.println("DEBUG: " + o);
+    }
+    
+    public static void debugerr(Object o) {
+        System.err.println("DEBUG: " + o);
     }
 }

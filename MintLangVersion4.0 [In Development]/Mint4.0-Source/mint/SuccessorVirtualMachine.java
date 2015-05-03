@@ -1,5 +1,7 @@
 package mint;
 
+import java.io.IOException;
+
 /**
  * Virtual machine that executes successor code and has access to console
  * and file IO on the actual system.
@@ -35,6 +37,16 @@ public class SuccessorVirtualMachine {
     public static final int EXIT_EOF = -1;
     public static final int EXIT_FAILURE = 1;
     
+    public static final int VM_EXIT = 0;
+    public static final int VM_HALT = 1;
+    public static final int VM_PRINT = 2;
+    public static final int VM_PRINTLN = 3;
+    public static final int VM_INPUT = 4;
+    public static final int VM_READ_PROPERTY = 5;
+    public static final int VM_WRITE_PROPERTY = 6;
+    public static final int VM_CALL_METHOD = 7;
+    public static final int VM_OTHER = 8;
+    
     public SuccessorVirtualMachine(int[] bytecode) throws InternalException {
         this(bytecode, DEFAULT_SEGMENTS, DEFAULT_SLOTS, DEFAULT_GROWTH);
     }
@@ -42,6 +54,7 @@ public class SuccessorVirtualMachine {
     public SuccessorVirtualMachine(int[] bytecode, int segments, int slots,
                                    char growth) throws InternalException {
         checkInitialConditions(segments, slots, growth);
+        program = bytecode;
         if ((program.length & 1) == 1) {
             throw new InternalException("Program length is " + program.length +
                                         ", number of words should be even.");
@@ -61,7 +74,6 @@ public class SuccessorVirtualMachine {
         doubleRegs = new double[NUM_REGISTERS];
         stringRegs = new String[NUM_REGISTERS];
         mintObjRegs = new MintObject[NUM_REGISTERS];
-        program = bytecode;
         isHalted = false;
     }
     
@@ -79,6 +91,10 @@ public class SuccessorVirtualMachine {
             switch (type) {
             case Mnemonics.INT:
                 switch (opcode) {
+                case Mnemonics.SHLV:
+                    intRegs[rA] <<= intRegs[rB] + constant;
+                    ip += 2;
+                    break;
                 case Mnemonics.MOV:
                     intRegs[rA] = intRegs[rB] + constant;
                     ip += 2;
@@ -122,27 +138,58 @@ public class SuccessorVirtualMachine {
                     ip = intRegs[rA] << 1;
                     break;
                 case Mnemonics.JEQ:
-                    ip = intRegs[rA] == intRegs[rB] ? constant << 1 : ip;
+                    ip = intRegs[rA] == intRegs[rB] ? constant << 1 : ip + 2;
                     break;
                 case Mnemonics.JNE:
-                    ip = intRegs[rA] != intRegs[rB] ? constant << 1 : ip;
+                    ip = intRegs[rA] != intRegs[rB] ? constant << 1 : ip + 2;
                     break;
                 case Mnemonics.JGE:
-                    ip = intRegs[rA] >= intRegs[rB] ? constant << 1 : ip;
+                    ip = intRegs[rA] >= intRegs[rB] ? constant << 1 : ip + 2;
                     break;
                 case Mnemonics.JG:
-                    ip = intRegs[rA] > intRegs[rB] ? constant << 1 : ip;
+                    ip = intRegs[rA] > intRegs[rB] ? constant << 1 : ip + 2;
                     break;
                 case Mnemonics.JLE:
-                    ip = intRegs[rA] <= intRegs[rB] ? constant << 1 : ip;
+                    ip = intRegs[rA] <= intRegs[rB] ? constant << 1 : ip + 2;
                     break;
                 case Mnemonics.JL:
-                    ip = intRegs[rA] < intRegs[rB] ? constant << 1 : ip;
+                    ip = intRegs[rA] < intRegs[rB] ? constant << 1 : ip + 2;
                     break;
                 case Mnemonics.SYSCALL:
                     /* The following should be changed for other types of
                      * syscalls. */
-                    return EXIT_SUCCESS;
+                    switch (rA) {
+                    case VM_EXIT:
+                        return EXIT_SUCCESS;
+                    case VM_PRINT:
+                        Mint.print(intRegs[rB]);
+                        ip += 2;
+                        break;
+                    case VM_PRINTLN:
+                        Mint.println(intRegs[rB]);
+                        ip += 2;
+                        break;
+                    case VM_INPUT:
+                        try {
+                            stringRegs[rB] = Mint.getln();
+                        } catch (IOException ex) {
+                            return EXIT_FAILURE;
+                        }
+                        ip += 2;
+                        break;
+                    case VM_READ_PROPERTY:
+                        break;
+                    case VM_WRITE_PROPERTY:
+                        break;
+                    case VM_CALL_METHOD:
+                        break;
+                    case VM_OTHER:
+                        break;
+                    case VM_HALT:
+                    default:
+                        return EXIT_FAILURE;
+                    }
+                    break;
                 default:
                     return EXIT_FAILURE;
                 }
@@ -162,7 +209,13 @@ public class SuccessorVirtualMachine {
     }
     
     public String inspectState() {
-        return null;
+        String result = "Registers that are not 0:\n";
+        for (int i = 0; i < NUM_REGISTERS; i++) {
+            if (intRegs[i] != 0) {
+                result += "r" + i + " = " + intRegs[i] + "\n";
+            }
+        }
+        return result;
     }
     
     public void writeInt(int i, int address) {
