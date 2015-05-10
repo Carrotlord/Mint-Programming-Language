@@ -22,12 +22,14 @@ public class SuccessorVirtualMachine {
     private MintObject[] mintObjRegs;
     private int[] program;
     private boolean isHalted;
+    private int[][] stackSegments;
     
     public static final char LINEAR_GROWTH = 0;
     public static final char QUADRATIC_GROWTH = 1;
     public static final char EXPONENTIAL_GROWTH = 2;
     
     private static final int DEFAULT_SEGMENTS = 14;
+    private static final int DEFAULT_STACK_SEGMENTS = 16;
     private static final char DEFAULT_SLOTS = 2048;
     private static final char DEFAULT_GROWTH = EXPONENTIAL_GROWTH;
     
@@ -46,6 +48,16 @@ public class SuccessorVirtualMachine {
     public static final int VM_WRITE_PROPERTY = 6;
     public static final int VM_CALL_METHOD = 7;
     public static final int VM_OTHER = 8;
+    
+    private static final int STACK_SEG_SIZE = 16384;
+    private int stackStart;
+    private static final int STACK_VIRTUAL_OFFSET = 0x6e000000;
+    private static final int STACK_VIRTUAL_BOUNDARY = STACK_VIRTUAL_OFFSET -
+                             STACK_SEG_SIZE * (DEFAULT_STACK_SEGMENTS - 1);
+    private int currentStackSeg;
+    
+    private static final int rSP = 62;
+    private static final int rBP = 63;
     
     public SuccessorVirtualMachine(int[] bytecode) throws InternalException {
         this(bytecode, DEFAULT_SEGMENTS, DEFAULT_SLOTS, DEFAULT_GROWTH);
@@ -74,7 +86,21 @@ public class SuccessorVirtualMachine {
         doubleRegs = new double[NUM_REGISTERS];
         stringRegs = new String[NUM_REGISTERS];
         mintObjRegs = new MintObject[NUM_REGISTERS];
+        stackSegments = new int[DEFAULT_STACK_SEGMENTS][];
+        stackSegments[DEFAULT_STACK_SEGMENTS - 1] = new int[STACK_SEG_SIZE];
+        stackStart = STACK_VIRTUAL_OFFSET + STACK_SEG_SIZE - 1;
+        setStackPointer(stackStart);
+        setBasePointer(stackStart);
         isHalted = false;
+        currentStackSeg = DEFAULT_STACK_SEGMENTS - 1;
+    }
+    
+    private void setStackPointer(int address) {
+        intRegs[rSP] = address;
+    }
+    
+    private void setBasePointer(int address) {
+        intRegs[rBP] = address;
     }
     
     public int execute() {
@@ -155,6 +181,11 @@ public class SuccessorVirtualMachine {
                 case Mnemonics.JL:
                     ip = intRegs[rA] < intRegs[rB] ? constant << 1 : ip + 2;
                     break;
+                case Mnemonics.CALL:
+                    intRegs[rSP]--;
+                    int destination = STACK_VIRTUAL_OFFSET - intRegs[rSP] - 1;
+                    stackSegments[currentStackSeg][destination] = ip;
+                    break;
                 case Mnemonics.SYSCALL:
                     /* The following should be changed for other types of
                      * syscalls. */
@@ -189,6 +220,16 @@ public class SuccessorVirtualMachine {
                     default:
                         return EXIT_FAILURE;
                     }
+                    break;
+                case Mnemonics.RET:
+                    break;
+                case Mnemonics.LOAD:
+                    break;
+                case Mnemonics.SAVE:
+                    break;
+                case Mnemonics.PUSH:
+                    break;
+                case Mnemonics.POP:
                     break;
                 default:
                     return EXIT_FAILURE;
