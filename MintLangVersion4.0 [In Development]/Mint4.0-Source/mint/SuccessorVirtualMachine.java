@@ -228,21 +228,29 @@ public class SuccessorVirtualMachine {
                     ip = returnAddress;
                     intRegs[rSP]++;
                     break;
-                case Mnemonics.LOAD:
-                    if (constant >= STACK_VIRTUAL_BOUNDARY) {
-                        // TODO: load int from stack
+                case Mnemonics.LOAD: {
+                    int baseAddress = intRegs[rB] + intRegs[rC] + constant;
+                    if (baseAddress >= STACK_VIRTUAL_BOUNDARY) {
+                        intRegs[rA] = stackSegments[currentStackSeg][
+                                      baseAddress - STACK_VIRTUAL_OFFSET];
                     } else {
                         // TODO: load int from heap
+                        return EXIT_FAILURE;
                     }
+                    ip += 2;
                     break;
-                case Mnemonics.SAVE:
-                    if (constant >= STACK_VIRTUAL_BOUNDARY) {
-                        // TODO: save int to stack
+                } case Mnemonics.SAVE: {
+                    int baseAddress = intRegs[rB] + intRegs[rC] + constant;
+                    if (baseAddress >= STACK_VIRTUAL_BOUNDARY) {
+                        stackSegments[currentStackSeg][
+                            baseAddress - STACK_VIRTUAL_OFFSET] = intRegs[rA];
                     } else {
                         // TODO: save int to heap
+                        return EXIT_FAILURE;
                     }
+                    ip += 2;
                     break;
-                case Mnemonics.PUSH: {
+                } case Mnemonics.PUSH: {
                     intRegs[rSP]--;
                     int destination = intRegs[rSP] - STACK_VIRTUAL_OFFSET;
                     stackSegments[currentStackSeg][destination] = constant;
@@ -275,8 +283,9 @@ public class SuccessorVirtualMachine {
     
     public String stackToString() {
         String result = "";
-        int stoppingPoint = Math.min(intRegs[rSP] - STACK_VIRTUAL_OFFSET,
-                                     intRegs[rBP] - STACK_VIRTUAL_OFFSET);
+        /* int stoppingPoint = Math.min(intRegs[rSP] - STACK_VIRTUAL_OFFSET,
+                                     intRegs[rBP] - STACK_VIRTUAL_OFFSET); */
+        int stoppingPoint = STACK_SEG_SIZE - 11;
         for (int i = STACK_SEG_SIZE - 1; i >= stoppingPoint; i--) {
             result = stackSegments[DEFAULT_STACK_SEGMENTS - 1][i] +
                      " | " + result;

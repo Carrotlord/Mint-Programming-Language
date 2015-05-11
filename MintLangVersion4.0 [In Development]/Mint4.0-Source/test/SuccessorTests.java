@@ -100,6 +100,51 @@ public class SuccessorTests extends TestGroup {
                         return false;
                     }
                 }
+            },
+            new TestGroup("recursive_factorial") {
+                @Override
+                protected boolean mainTest() {
+                    String recursiveFactorial =
+                        Assembler.SUCCESSOR_NOP +
+                        "i mov r1, rZERO, 6\n" +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save r1, rSP, rZERO, 0\n" +
+                        "call 7\n" +
+                        "i syscall r3, r5, 0\n" +
+                        Assembler.SUCCESSOR_EXIT + "\n" +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save rBP, rSP, rZERO, 0\n" +
+                        "i mov rBP, rSP, 0\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i load r1, rBP, rZERO, 2\n" +
+                        "jeq r1, rZERO, 20\n" +
+                        "i sub r1, rZERO, 1\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save r1, rSP, rZERO, 0\n" +
+                        "call 7\n" +
+                        "i add rSP, rZERO, 1\n" +
+                        "j 22\n" +
+                        "i mov r5, rZERO, 1\n" +
+                        "j 26\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i load r6, rBP, rZERO, 2\n" +
+                        "i mul r5, r6, 0\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i load rBP, rSP, rZERO, 0\n" +
+                        "i add rSP, rZERO, 1\n" +
+                        "ret";
+                    try {
+                        int[] compiled =
+                              Assembler.flatCompileDirectly(recursiveFactorial);
+                        SuccessorVirtualMachine vm =
+                            new SuccessorVirtualMachine(compiled);
+                        int exitCode = vm.execute();
+                        return exitCode == SuccessorVirtualMachine.EXIT_SUCCESS;
+                    } catch (InternalException ex) {
+                        return false;
+                    }
+                }
             }
         };
         setSubtests(tests);
