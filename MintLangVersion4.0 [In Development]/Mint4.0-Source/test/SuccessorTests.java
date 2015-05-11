@@ -2,6 +2,7 @@ package test;
 
 import mint.Assembler;
 import mint.InternalException;
+import mint.Mint;
 import mint.SuccessorVirtualMachine;
 
 /**
@@ -66,6 +67,31 @@ public class SuccessorTests extends TestGroup {
                     try {
                         int[] compiled =
                               Assembler.flatCompileDirectly(forLoopProgram);
+                        SuccessorVirtualMachine vm =
+                            new SuccessorVirtualMachine(compiled);
+                        int exitCode = vm.execute();
+                        return exitCode == SuccessorVirtualMachine.EXIT_SUCCESS;
+                    } catch (InternalException ex) {
+                        return false;
+                    }
+                }
+            },
+            new TestGroup("function_calls") {
+                @Override
+                protected boolean mainTest() {
+                    String functionProgram = "j 3\n" +
+                                             "i mul r7, rZERO, 3\n" +
+                                             "ret\n" +
+                                             "i mov r7, rZERO, 10\n" +
+                                             "i mov r1, rZERO, 4\n" +
+                                             "call 1\n" +
+                                             "i sub r1, rZERO, 1\n" +
+                                             "jg r1, rZERO, 5\n" +
+                                             "i syscall r3, r7, 0\n" +
+                                             Assembler.SUCCESSOR_EXIT;
+                    try {
+                        int[] compiled =
+                              Assembler.flatCompileDirectly(functionProgram);
                         SuccessorVirtualMachine vm =
                             new SuccessorVirtualMachine(compiled);
                         int exitCode = vm.execute();

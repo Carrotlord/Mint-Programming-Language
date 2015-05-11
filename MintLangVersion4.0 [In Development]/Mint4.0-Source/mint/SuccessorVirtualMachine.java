@@ -181,12 +181,13 @@ public class SuccessorVirtualMachine {
                 case Mnemonics.JL:
                     ip = intRegs[rA] < intRegs[rB] ? constant << 1 : ip + 2;
                     break;
-                case Mnemonics.CALL:
+                case Mnemonics.CALL: {
                     intRegs[rSP]--;
-                    int destination = STACK_VIRTUAL_OFFSET - intRegs[rSP] - 1;
-                    stackSegments[currentStackSeg][destination] = ip;
+                    int destination = intRegs[rSP] - STACK_VIRTUAL_OFFSET;
+                    stackSegments[currentStackSeg][destination] = ip + 2;
+                    ip = constant << 1;
                     break;
-                case Mnemonics.SYSCALL:
+                } case Mnemonics.SYSCALL:
                     /* The following should be changed for other types of
                      * syscalls. */
                     switch (rA) {
@@ -222,14 +223,37 @@ public class SuccessorVirtualMachine {
                     }
                     break;
                 case Mnemonics.RET:
+                    int returnAddress = stackSegments[currentStackSeg][
+                                        intRegs[rSP] - STACK_VIRTUAL_OFFSET];
+                    ip = returnAddress;
+                    intRegs[rSP]++;
                     break;
                 case Mnemonics.LOAD:
+                    if (constant >= STACK_VIRTUAL_BOUNDARY) {
+                        // TODO: load int from stack
+                    } else {
+                        // TODO: load int from heap
+                    }
                     break;
                 case Mnemonics.SAVE:
+                    if (constant >= STACK_VIRTUAL_BOUNDARY) {
+                        // TODO: save int to stack
+                    } else {
+                        // TODO: save int to heap
+                    }
                     break;
-                case Mnemonics.PUSH:
+                case Mnemonics.PUSH: {
+                    intRegs[rSP]--;
+                    int destination = intRegs[rSP] - STACK_VIRTUAL_OFFSET;
+                    stackSegments[currentStackSeg][destination] = constant;
+                    ip += 2;
                     break;
-                case Mnemonics.POP:
+                } case Mnemonics.POP:
+                    int poppedValue = stackSegments[currentStackSeg][
+                                      intRegs[rSP] - STACK_VIRTUAL_OFFSET];
+                    intRegs[rA] = poppedValue;
+                    intRegs[rSP]++;
+                    ip += 2;
                     break;
                 default:
                     return EXIT_FAILURE;
@@ -247,6 +271,17 @@ public class SuccessorVirtualMachine {
             // TODO: finish this method
         }
         return EXIT_EOF;
+    }
+    
+    public String stackToString() {
+        String result = "";
+        int stoppingPoint = Math.min(intRegs[rSP] - STACK_VIRTUAL_OFFSET,
+                                     intRegs[rBP] - STACK_VIRTUAL_OFFSET);
+        for (int i = STACK_SEG_SIZE - 1; i >= stoppingPoint; i--) {
+            result = stackSegments[DEFAULT_STACK_SEGMENTS - 1][i] +
+                     " | " + result;
+        }
+        return result;
     }
     
     public String inspectState() {
