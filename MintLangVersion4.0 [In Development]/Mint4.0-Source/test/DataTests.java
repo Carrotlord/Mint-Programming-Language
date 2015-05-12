@@ -1,6 +1,6 @@
 package test;
 
-import mint.CharQueue;
+import mint.CharLinkedList;
 
 /**
  * Tests for custom data structures.
@@ -14,12 +14,25 @@ public class DataTests extends TestGroup {
                 @Override
                 protected boolean mainTest() {
                     String str = "This is a test.";
-                    CharQueue cq = new CharQueue();
+                    CharLinkedList cq = new CharLinkedList();
                     for (char c : str.toCharArray()) {
                         cq.push(c);
                     }
-                    return cq.convertToString().equals("CharQueue[\"" + str +
-                                                       "\"]");
+                    return cq.convertToString().equals("CharLinkedList[\"" +
+                                                       str + "\"]");
+                }
+            },
+            new TestGroup("charstack") {
+                @Override
+                protected boolean mainTest() {
+                    String backwards = "sdrawkcaB";
+                    String forwards = "Backwards";
+                    CharLinkedList cq = new CharLinkedList();
+                    for (char c : backwards.toCharArray()) {
+                        cq.push(c);
+                    }
+                    return cq.convertToReversedString().equals(
+                               "CharLinkedList[\"" + forwards + "\"]");
                 }
             }
         };
