@@ -61,7 +61,11 @@ public class Mint implements InputOutputMachine {
     }
     
     private static void runTests() {
-        TestGroup[] allTests = {new AssemblerTests(), new SuccessorTests()};
+        TestGroup[] allTests = {
+            new AssemblerTests(),
+            new SuccessorTests(),
+            new DataTests()
+        };
         (new TestRunner(allTests)).runTests();
     }
     

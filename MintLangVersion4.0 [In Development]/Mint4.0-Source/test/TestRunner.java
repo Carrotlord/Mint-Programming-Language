@@ -18,6 +18,7 @@ public class TestRunner {
     public void runTests() {
         StringPrintStream strOut = null;
         boolean isStrOutWorking = true;
+
         try {
             strOut = new StringPrintStream();
             Mint.IO.setPrintStream(strOut);
@@ -34,8 +35,7 @@ public class TestRunner {
         String inspected = strOut.toString();
         Mint.IO.setSystemPrintStream();
         if (isStrOutWorking) {
-            Mint.IO.debugln("TEST OUTPUT:\n" +
-                                 inspected);
+            Mint.IO.debugln("TEST OUTPUT:\n" + inspected);
         }
         Mint.IO.debugln("All tests passed? " +
                     (allTestsPassed ? "Yes" : "No, stopped on first failure"));
