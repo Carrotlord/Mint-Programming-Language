@@ -11,11 +11,11 @@ import test.*;
  * Mint Programming Language, version 4 - the "compiled to bytecode" edition.
  * @author Jiangcheng Oliver Chu
  */
-public class Mint {
+public class Mint implements InputOutputMachine {
     private BufferedReader keyboard;
     private PrintStream output;
     private InputStream input;
-    public static final Mint manager = new Mint();
+    public static final Mint IO = new Mint();
     
     public Mint(InputStream in, PrintStream out) {
         input = in;
@@ -52,11 +52,11 @@ public class Mint {
     }
     
     public void reportMaxHeapSizes() {
-        manager.println(SuccessorVirtualMachine.reportMaximumHeapSize(
+        IO.println(SuccessorVirtualMachine.reportMaximumHeapSize(
                 SuccessorVirtualMachine.LINEAR_GROWTH, 2048));
-        manager.println(SuccessorVirtualMachine.reportMaximumHeapSize(
+        IO.println(SuccessorVirtualMachine.reportMaximumHeapSize(
                 SuccessorVirtualMachine.QUADRATIC_GROWTH, 2048));
-        manager.println(SuccessorVirtualMachine.reportMaximumHeapSize(
+        IO.println(SuccessorVirtualMachine.reportMaximumHeapSize(
                 SuccessorVirtualMachine.EXPONENTIAL_GROWTH, 2047));
     }
     
@@ -86,6 +86,10 @@ public class Mint {
      */
     public String getln() throws IOException {
         return keyboard.readLine();
+    }
+    
+    public void debug(Object o) {
+        output.print("DEBUG: " + o);
     }
     
     public void debugln(Object o) {

@@ -198,10 +198,18 @@ public class SuccessorTests extends TestGroup {
                     try {
                         int[] compiled =
                               Assembler.flatCompileDirectly(recursiveFib);
-                        SuccessorVirtualMachine vm =
+                        final SuccessorVirtualMachine vm =
                             new SuccessorVirtualMachine(compiled);
-                        int exitCode = vm.execute();
-                        return exitCode == SuccessorVirtualMachine.EXIT_SUCCESS;
+                        Timeable executeTimer = new Timeable() {
+                            public boolean run() {
+                                int exitCode = vm.execute();
+                                return exitCode ==
+                                       SuccessorVirtualMachine.EXIT_SUCCESS;
+                            }
+                        };
+                        Mint.IO.println("Fibonacci takes " +
+                            executeTimer.getTimeTaken() + " seconds.");
+                        return true;
                     } catch (InternalException ex) {
                         return false;
                     }
@@ -213,13 +221,6 @@ public class SuccessorTests extends TestGroup {
     
     @Override
     protected boolean mainTest() {
-        TestGroup fibonacciTest = findTest("recursive_fibonacci");
-        if (fibonacciTest == null) {
-            return false;
-        } else {
-            Mint.manager.debugln("Fibonacci takes: " +
-                                 fibonacciTest.getTimeTaken() + " seconds");
-        }
         return true;
     }
 }

@@ -20,7 +20,7 @@ public class TestRunner {
         boolean isStrOutWorking = true;
         try {
             strOut = new StringPrintStream();
-            Mint.manager.setPrintStream(strOut);
+            Mint.IO.setPrintStream(strOut);
         } catch (UnsupportedEncodingException ex) {
             isStrOutWorking = false;
         }
@@ -32,12 +32,12 @@ public class TestRunner {
             }
         }
         String inspected = strOut.toString();
-        Mint.manager.setSystemPrintStream();
+        Mint.IO.setSystemPrintStream();
         if (isStrOutWorking) {
-            Mint.manager.debugln("TEST OUTPUT:\n" +
+            Mint.IO.debugln("TEST OUTPUT:\n" +
                                  inspected);
         }
-        Mint.manager.debugln("All tests passed? " +
+        Mint.IO.debugln("All tests passed? " +
                     (allTestsPassed ? "Yes" : "No, stopped on first failure"));
     }
 }
