@@ -2,7 +2,9 @@ package mint;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import test.*;
 
 /**
@@ -10,8 +12,36 @@ import test.*;
  * @author Jiangcheng Oliver Chu
  */
 public class Mint {
-    public static final BufferedReader KEYBOARD =
-        new BufferedReader(new InputStreamReader(System.in));
+    private BufferedReader keyboard;
+    private PrintStream output;
+    private InputStream input;
+    public static final Mint manager = new Mint();
+    
+    public Mint(InputStream in, PrintStream out) {
+        input = in;
+        output = out;
+        keyboard = new BufferedReader(new InputStreamReader(input));
+    }
+    
+    public Mint(PrintStream out) {
+        this(System.in, out);
+    }
+    
+    public Mint() {
+        this(System.in, System.out);
+    }
+    
+    public void setPrintStream(StringPrintStream out) {
+        output = out;
+    }
+    
+    public void setSystemPrintStream() {
+        output = System.out;
+    }
+    
+    public String inspectPrintOutput() {
+        return output.toString();
+    }
 
     /**
      * @param args the command line arguments
@@ -21,12 +51,12 @@ public class Mint {
         runTests();
     }
     
-    public static void reportMaxHeapSizes() {
-        println(SuccessorVirtualMachine.reportMaximumHeapSize(
+    public void reportMaxHeapSizes() {
+        manager.println(SuccessorVirtualMachine.reportMaximumHeapSize(
                 SuccessorVirtualMachine.LINEAR_GROWTH, 2048));
-        println(SuccessorVirtualMachine.reportMaximumHeapSize(
+        manager.println(SuccessorVirtualMachine.reportMaximumHeapSize(
                 SuccessorVirtualMachine.QUADRATIC_GROWTH, 2048));
-        println(SuccessorVirtualMachine.reportMaximumHeapSize(
+        manager.println(SuccessorVirtualMachine.reportMaximumHeapSize(
                 SuccessorVirtualMachine.EXPONENTIAL_GROWTH, 2047));
     }
     
@@ -38,15 +68,15 @@ public class Mint {
     /** Prints object to console; can be redirected to a file or other output.
      * @param o object to be printed
      */
-    public static void println(Object o) {
-        System.out.println(o);
+    public void println(Object o) {
+        output.println(o);
     }
     
-    public static void print(Object o) {
-        System.out.print(o);
+    public void print(Object o) {
+        output.print(o);
     }
     
-    public static void printerr(Object o) {
+    public void printerr(Object o) {
         System.err.println(o);
     }
     
@@ -54,15 +84,15 @@ public class Mint {
      * @return user input
      * @throws IOException 
      */
-    public static String getln() throws IOException {
-        return KEYBOARD.readLine();
+    public String getln() throws IOException {
+        return keyboard.readLine();
     }
     
-    public static void debugln(Object o) {
-        System.out.println("DEBUG: " + o);
+    public void debugln(Object o) {
+        output.println("DEBUG: " + o);
     }
     
-    public static void debugerr(Object o) {
+    public void debugerr(Object o) {
         System.err.println("DEBUG: " + o);
     }
 }

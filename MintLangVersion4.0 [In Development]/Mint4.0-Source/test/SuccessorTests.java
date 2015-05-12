@@ -145,6 +145,67 @@ public class SuccessorTests extends TestGroup {
                         return false;
                     }
                 }
+            },
+            new TestGroup("recursive_fibonacci") {
+                @Override
+                protected boolean mainTest() {
+                    String recursiveFib =
+                        Assembler.SUCCESSOR_NOP +
+                        "i mov r1, rZERO, 33\n" +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save r1, rSP, rZERO, 0\n" +
+                        "call 8\n" +
+                        "i add rSP, rZERO, 1\n" +
+                        "i syscall r3, r5, 0\n" +
+                        Assembler.SUCCESSOR_EXIT + "\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save rBP, rSP, rZERO, 0\n" +
+                        "i mov rBP, rSP, 0\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i load r1, rBP, rZERO, 2\n" +
+                        "i mov r9, rZERO, 1\n" +
+                        "jle r1, r9, 40\n" +
+                        "i sub r1, rZERO, 1\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save r1, rSP, rZERO, 0\n" +
+                        "call 8\n" +
+                        "i add rSP, rZERO, 1\n" +
+                        "i mov r6, r5, 0\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i load r1, rBP, rZERO, 2\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save r6, rSP, rZERO, 0\n" +
+                        "i sub r1, rZERO, 2\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i sub rSP, rZERO, 1\n" +
+                        "i save r1, rSP, rZERO, 0\n" +
+                        "call 8\n" +
+                        "i add rSP, rZERO, 1\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        Assembler.SUCCESSOR_NOP +
+                        "i load r6, rSP, rZERO, 0\n" +
+                        "i add rSP, rZERO, 1\n" +
+                        "i add r5, r6, 0\n" +
+                        "j 42\n" +
+                        "i mov r5, r1, 0\n" +
+                        Assembler.SUCCESSOR_NOP +
+                        "i load rBP, rSP, rZERO, 0\n" +
+                        "add rSP, rZERO, 1\n" +
+                        "ret";
+                    try {
+                        int[] compiled =
+                              Assembler.flatCompileDirectly(recursiveFib);
+                        SuccessorVirtualMachine vm =
+                            new SuccessorVirtualMachine(compiled);
+                        int exitCode = vm.execute();
+                        return exitCode == SuccessorVirtualMachine.EXIT_SUCCESS;
+                    } catch (InternalException ex) {
+                        return false;
+                    }
+                }
             }
         };
         setSubtests(tests);
@@ -152,6 +213,13 @@ public class SuccessorTests extends TestGroup {
     
     @Override
     protected boolean mainTest() {
+        TestGroup fibonacciTest = findTest("recursive_fibonacci");
+        if (fibonacciTest == null) {
+            return false;
+        } else {
+            Mint.manager.debugln("Fibonacci takes: " +
+                                 fibonacciTest.getTimeTaken() + " seconds");
+        }
         return true;
     }
 }

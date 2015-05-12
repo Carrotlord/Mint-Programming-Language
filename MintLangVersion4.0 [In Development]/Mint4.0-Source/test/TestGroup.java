@@ -4,10 +4,10 @@ import java.util.HashMap;
 import mint.Mint;
 
 /**
- *
+ * A collection of tests and subtests.
  * @author Jiangcheng Oliver Chu
  */
-public abstract class TestGroup {
+public abstract class TestGroup extends Timeable {
     private final String name;
     private TestGroup[] subTests;
     private boolean hasFailed = false;
@@ -16,6 +16,15 @@ public abstract class TestGroup {
     public TestGroup(String identifier, TestGroup[] tests) {
         name = identifier;
         setSubtests(tests);
+    }
+    
+    protected TestGroup findTest(String name) {
+        for (TestGroup test : subTests) {
+            if (test.getName().equals(name)) {
+                return test;
+            }
+        }
+        return null;
     }
     
     protected void setFailureMessage(String message) {
@@ -79,14 +88,14 @@ public abstract class TestGroup {
     public boolean run() {
         updateFailedStatus(mainTest());
         if (getHasFailed()) {
-            Mint.printerr(failedMessage());
+            Mint.manager.printerr(failedMessage());
             return false;
         }
         for (int i = 0; i < subTests.length; i++) {
             updateFailedStatus(subTests[i].run());
             if (getHasFailed()) {
-                Mint.printerr(failedMessage(subTests[i],
-                              "see above for reason"));
+                Mint.manager.printerr(failedMessage(subTests[i],
+                                      "see above for reason"));
                 return false;
             }
         }

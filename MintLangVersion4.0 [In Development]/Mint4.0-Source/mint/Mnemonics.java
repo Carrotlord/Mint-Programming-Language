@@ -1,7 +1,7 @@
 package mint;
 
 /**
- *
+ * Integer opcode representations of Successor instructions.
  * @author Jiangcheng Oliver Chu
  */
 public class Mnemonics {

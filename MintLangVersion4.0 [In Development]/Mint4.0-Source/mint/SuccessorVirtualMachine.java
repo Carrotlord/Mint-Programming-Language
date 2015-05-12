@@ -194,16 +194,16 @@ public class SuccessorVirtualMachine {
                     case VM_EXIT:
                         return EXIT_SUCCESS;
                     case VM_PRINT:
-                        Mint.print(intRegs[rB]);
+                        Mint.manager.print(intRegs[rB]);
                         ip += 2;
                         break;
                     case VM_PRINTLN:
-                        Mint.println(intRegs[rB]);
+                        Mint.manager.println(intRegs[rB]);
                         ip += 2;
                         break;
                     case VM_INPUT:
                         try {
-                            stringRegs[rB] = Mint.getln();
+                            stringRegs[rB] = Mint.manager.getln();
                         } catch (IOException ex) {
                             return EXIT_FAILURE;
                         }
