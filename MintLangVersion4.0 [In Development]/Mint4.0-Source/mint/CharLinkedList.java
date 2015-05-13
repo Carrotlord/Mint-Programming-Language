@@ -17,7 +17,7 @@ public class CharLinkedList {
     public CharLinkedList() {}
     
     public void push(char c) {
-        if (eldest == null) {
+        if (eldest == null || youngest == null) {
             eldest = new CharNodeBundle();
             youngest = eldest;
             writeToCurrent(c);
@@ -49,7 +49,7 @@ public class CharLinkedList {
                 throw new NoSuchElementException(
                           "Char queue has no more elements.");
             }
-            result = eldest.read(readPosition & 0x7);
+            result = eldest.read(readPosition & 0x3);
             checkDepletion();
         }
         return result;
@@ -66,11 +66,12 @@ public class CharLinkedList {
                 "No elements left in the stack.");
         }
         while (result == NIL) {
+            writePosition--;
             if (writePosition < 0) {
                 throw new NoSuchElementException(
                           "Char stack has no more elements.");
             }
-            result = youngest.skim(writePosition & 0x7);
+            result = youngest.skim(writePosition & 0x3);
             checkEmptyStack();
         }
         return result;
@@ -80,7 +81,6 @@ public class CharLinkedList {
         if (youngest.isComplementary()) {
             youngest = youngest.getParent();
         }
-        writePosition--;
     }
     
     private void checkDepletion() {
@@ -91,7 +91,7 @@ public class CharLinkedList {
     }
     
     private void writeToCurrent(char c) {
-        youngest.write(c, writePosition & 0x7);
+        youngest.write(c, writePosition & 0x3);
         writePosition++;
     }
     
@@ -144,7 +144,7 @@ public class CharLinkedList {
         private long contents = 0;
         private byte writtenTo = 0;
         private byte readFrom = 0;
-        private static final long MASK = 0xff;
+        private static final long MASK = 0xffff;
         private CharNodeBundle child;
         private CharNodeBundle parent;
         
@@ -174,11 +174,11 @@ public class CharLinkedList {
         }
         
         boolean isFull() {
-            return writtenTo == (byte) 0xff;
+            return writtenTo == (byte) 0xf;
         }
         
         boolean isDepleted() {
-            return readFrom == (byte) 0xff;
+            return readFrom == (byte) 0xf;
         }
         
         /**
@@ -191,20 +191,20 @@ public class CharLinkedList {
         }
         
         void write(char c, int position) {
-            int index = position << 3;
+            int index = position << 4;
             contents &= ~(MASK << index);
             contents |= ((long) c) << index;
             writtenTo |= 1 << position;
         }
         
         char read(int position) {
-            int index = position << 3;
+            int index = position << 4;
             readFrom |= 1 << position;
             return (char) ((contents & (MASK << index)) >>> index);
         }
 
         char skim(int position) {
-            int index = position << 3;
+            int index = position << 4;
             char result = (char) ((contents & (MASK << index)) >>> index);
             if (result == NIL) {
                 return NIL;
@@ -217,8 +217,8 @@ public class CharLinkedList {
         @Override
         public String toString() {
             String result = "";
-            for (int i = 0; i < 8; i++) {
-                long position = i << 3;
+            for (int i = 0; i < 4; i++) {
+                long position = i << 4;
                 char appendable =
                      (char) ((contents & (MASK << position)) >>> position);
                 if (appendable == NIL) {

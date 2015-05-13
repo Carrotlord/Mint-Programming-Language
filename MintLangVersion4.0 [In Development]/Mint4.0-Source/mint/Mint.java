@@ -47,7 +47,6 @@ public class Mint implements InputOutputMachine {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //reportMaxHeapSizes();
         runTests();
     }
     
@@ -64,7 +63,8 @@ public class Mint implements InputOutputMachine {
         TestGroup[] allTests = {
             new AssemblerTests(),
             new SuccessorTests(),
-            new DataTests()
+            new DataTests(),
+            new CompilerTests()
         };
         (new TestRunner(allTests)).runTests();
     }

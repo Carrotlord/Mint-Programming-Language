@@ -25,14 +25,14 @@ public class DataTests extends TestGroup {
             new TestGroup("charstack") {
                 @Override
                 protected boolean mainTest() {
-                    String backwards = "sdrawkcaB";
-                    String forwards = "Backwards";
+                    String backwards = "\u266b sdrawkcaB";
+                    String forwards = "Backwards \u266b";
                     CharLinkedList cq = new CharLinkedList();
                     for (char c : backwards.toCharArray()) {
                         cq.push(c);
                     }
                     return cq.convertToReversedString().equals(
-                               "CharLinkedList[\"" + forwards + "\"]");
+                                   "CharLinkedList[\"" + forwards + "\"]");
                 }
             }
         };
