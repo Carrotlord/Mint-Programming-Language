@@ -1,0 +1,108 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../css/styles.css">
+<title>Operators</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Operators</span><br />
+<span class="subtitle">Arithmetic, Bitwise, Boolean, and More</span>
+</div>
+<br>
+<table class="main"><tr><td>
+
+<span class="section_title">Arithmetic Operators</span><br>
+Mint supports the following arithmetic operators. In Mint, double-precision floats are called "real numbers". In the following table, <code>a</code> and <code>b</code> are numeric values, usually an integer, ratio, or real.
+
+<table class="simple">
+<tr><th class="simple_th">Operation</th><th class="simple_th">Symbol</th><th class="simple_th">Usage</th></tr>
+<tr><td class="simple_td">Addition</td><td class="simple_td">+</td><td class="monospace simple_td">a + b</td></tr>
+<tr><td class="simple_td">Subtraction</td><td class="simple_td">-</td><td class="monospace simple_td">a - b</td></tr>
+<tr><td class="simple_td">Multiplication</td><td class="simple_td">*</td><td class="monospace simple_td">a * b</td></tr>
+<tr><td class="simple_td">Implicit Multiplication</td><td class="italic simple_td">(none)</td><td class="monospace simple_td">a(b)</td></tr>
+<tr><td class="simple_td">Division</td><td class="simple_td">/</td><td class="monospace simple_td">a / b</td></tr>
+<tr><td class="simple_td">Integer Division</td><td class="simple_td">intDiv</td><td class="monospace simple_td">intDiv(a, b)</td></tr>
+<tr><td class="simple_td">Exponentiation</td><td class="simple_td">^</td><td class="monospace simple_td">a ^ b</td></tr>
+<tr><td class="simple_td">Construct Ratio</td><td class="simple_td">:</td><td class="monospace simple_td">a:b</td></tr>
+<tr><td class="simple_td">Modulo</td><td class="simple_td">%</td><td class="monospace simple_td">a % b</td></tr>
+<tr><td class="simple_td">Increment</td><td class="simple_td">++</td><td class="monospace simple_td">a++</td></tr>
+<tr><td class="simple_td">Decrement</td><td class="simple_td">--</td><td class="monospace simple_td">a--</td></tr>
+</table>
+
+The increment and decrement operators must come after the variable (postfix operators). Even though they do return a value, it is highly suggested that you don't use expressions such as <code>x = (y++) * (z--)</code>. Instead, expressions like <code>y++</code> should be on their own line or as part of a for-loop.<br><br>
+
+Implicit multiplication, which has no symbol, is the act of multiplying by juxtaposing numbers or variables, like in mathematics. Some examples in Mint:
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">x = <span class="number2">0.125</span>
+y = <span class="number2">2</span>(x)
+z = (x+<span class="number2">3</span>)y
+<span class="keyword">print</span> z    <span class="comment2">// Prints 0.78125</span></pre>
+</td></tr></table>
+What you need to do is place one of the multiplicands in parentheses, and put the other either before or after it.
+<br><br>
+
+<span class="section_title">String Operators</span><br>
+The main operator for strings is concatenation, which uses the <code>+</code> symbol (also used for addition). Mint has two types of strings, regular strings and ribbons. Strings are immutable arrays of characters and ribbons are mutable linked-lists of characters. Both have their pros and cons, and this will be discussed later. A ribbon and a string can be concatenated, in which case the string is converted to a ribbon. Use <code>ribbon.toString()</code> to avoid this.
+<br><br>
+The only other operator for strings is <code>in</code>. <code>strA in strB</code> returns <code>true</code> if <code>strA</code> is a substring of <code>strB</code>, and <code>false</code> otherwise. Even so, the <code>in</code> keyword can also be used on other types of sequences and collections.<br><br>
+
+<span class="section_title">Comparison Operators</span><br>
+Comparison operators return either <code>true</code> or <code>false</code> depending on the values of both their operands.
+
+<table class="simple">
+<tr><th class="simple_th">Operation</th><th class="simple_th">Symbol</th><th class="simple_th">Usage</th></tr>
+<tr><td class="simple_td">Equal To</td><td class="simple_td">==</td><td class="monospace simple_td">a == b</td></tr>
+<tr><td class="simple_td">Not Equal To</td><td class="simple_td">!=</td><td class="monospace simple_td">a != b</td></tr>
+<tr><td class="simple_td">Greater Than</td><td class="simple_td">&gt;</td><td class="monospace simple_td">a &gt; b</td></tr>
+<tr><td class="simple_td">Less Than</td><td class="italic simple_td">&lt;</td><td class="monospace simple_td">a &lt; b</td></tr>
+<tr><td class="simple_td">Greater Than or Equal To</td><td class="simple_td">&gt;=</td><td class="monospace simple_td">a &gt;= b</td></tr>
+<tr><td class="simple_td">Less Than or Equal To</td><td class="simple_td">&lt;=</td><td class="monospace simple_td">a &lt;= b</td></tr>
+</table>
+
+Note that the single equals sign <code>(=)</code> is used for variable assignment.<br>
+<code>==</code> and <code>!=</code> work for many objects. They can be used to test equality of numerics, strings, list contents, and more.<br>
+The other comparison operators, such as <code>&gt;=</code>, only work on objects that can be properly ordered. This usually means numerics (integers, ratios, reals). However, they will also <span class="italic">compare strings by length</span> and <span class="italic">compare lists by length</span>. Though you can compare strings with strings and lists with lists, you can't compare a string and a list, unless you only use <code>==</code> and <code>!=</code>.
+<br><br>
+
+<span class="section_title">Boolean Operators</span><br>
+Boolean operators take in boolean values, and return either <code>true</code> or <code>false</code>.
+
+<table class="simple">
+<tr><th class="simple_th">Operation</th><th class="simple_th">Symbol</th><th class="simple_th">Usage</th></tr>
+<tr><td class="simple_td">And</td><td class="simple_td">and</td><td class="monospace simple_td">a and b</td></tr>
+<tr><td class="simple_td">Or</td><td class="simple_td">or</td><td class="monospace simple_td">a or b</td></tr>
+<tr><td class="simple_td">Exclusive Or</td><td class="simple_td">xor</td><td class="monospace simple_td">a xor b</td></tr>
+<tr><td class="simple_td">Not</td><td class="simple_td">not</td><td class="monospace simple_td">not a</td></tr>
+</table>
+<br>
+<span class="section_title">Bitwise Operators</span><br>
+Bitwise operators treat integers as 32-bit fields and perform operations on those fields.
+
+<table class="simple">
+<tr><th class="simple_th">Operation</th><th class="simple_th">Symbol</th><th class="simple_th">Usage</th></tr>
+<tr><td class="simple_td">Bitwise And</td><td class="simple_td">&amp;</td><td class="monospace simple_td">a &amp; b</td></tr>
+<tr><td class="simple_td">Bitwise Or</td><td class="simple_td">@</td><td class="monospace simple_td">a @ b</td></tr>
+<tr><td class="simple_td">Bitwise Exclusive Or</td><td class="simple_td">$</td><td class="monospace simple_td">a $ b</td></tr>
+<tr><td class="simple_td">Bitwise Not</td><td class="simple_td">~</td><td class="monospace simple_td">~a</td></tr>
+<tr><td class="simple_td">Shift Left</td><td class="simple_td">&lt;&lt;</td><td class="monospace simple_td">a &lt;&lt; b</td></tr>
+<tr><td class="simple_td">Shift Arithmetic Right</td><td class="simple_td">&gt;&gt;</td><td class="monospace simple_td">a &gt;&gt; b</td></tr>
+<tr><td class="simple_td">Shift Logical Right</td><td class="simple_td">shlr</td><td class="monospace simple_td">shlr(a, b)</td></tr>
+</table>
+
+The choices for bitwise or and bitwise xor look really strange. For bitwise xor, note that <code>^</code> is used for exponentiation, so <code>$</code> is substituted. In the Julia language, which also uses <code>^</code> for exponentiation, <code>$</code> is the bitwise xor operator. For bitwise or, <code>|</code> is used for something we will discuss later, so <code>@</code> is substituted. You can also use <code>andb</code>, <code>orb</code>, <code>xorb</code>, <code>notb</code> keywords which are equivalent to <code>&amp;</code>, <code>@</code>, <code>$</code>, <code>~</code> respectively if you find the keywords easier to read.<br><br>
+
+Control flow is discussed in the next lesson.<br><br>
+
+<span class="nav">Quick Navigation</span><br>
+Previous Lesson: <a href="running_prgms.html">Running Programs</a><br>
+Next Lesson: <a href="ctrl_flow_1.html">Control Flow</a><br>
+
+<br><br>
+</td></tr></table>
+<br><br><br>
+
+</html>
