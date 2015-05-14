@@ -18,6 +18,11 @@ body
     font-size:10px;
 }
 
+.petite
+{
+    font-size:11px;
+}
+
 .big
 {
     font-size:16px;
@@ -52,6 +57,16 @@ a:hover
     color:#00378a;
 }
 
+a.does_not_exist_yet {
+    color: darkred;
+    cursor: pointer;
+}
+
+a.does_not_exist_yet:hover {
+    color: red;
+    cursor: pointer;
+}
+
 table.main
 {
     /* Note that td, th, tr will have 0 border unless otherwise
@@ -62,6 +77,20 @@ table.main
     border-collapse:collapse;
     width:80%;
     text-align:left;
+}
+
+pre.mint_code_box {
+    color: white;
+    background-color: #333;
+    margin: 0;
+    padding: 4px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+table.width_down {
+    width: 40px;
 }
 
 table.toc
@@ -305,14 +334,30 @@ table.img_framer
     color:#800080;
 }
 
+.string2 {
+    color:#7B60FF;
+}
+
 .comment
 {
     color:#008000;
 }
 
+.comment2 {
+    color:#00A70E;
+}
+
 .number
 {
     color:#0000ff;
+}
+
+.tag {
+    color:#E57200;
+}
+
+.number2 {
+    color:#93A3FF;
 }
 
 .hex_dump_box
