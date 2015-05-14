@@ -12,10 +12,19 @@ public abstract class TestGroup extends Timeable {
     private TestGroup[] subTests;
     private boolean hasFailed = false;
     private String failureMessage = null;
+    private TestGroup childTest = null;
+    private static final String NO_CHILDREN = "@(no-children)";
     
     public TestGroup(String identifier, TestGroup[] tests) {
         name = identifier;
         setSubtests(tests);
+        if (!identifier.equals(NO_CHILDREN)) {
+            childTest = new AlwaysPasses();
+        }
+    }
+    
+    public TestGroup(String identifier) {
+        this(identifier, new TestGroup[]{});
     }
     
     protected TestGroup findTest(String name) {
@@ -27,12 +36,12 @@ public abstract class TestGroup extends Timeable {
         return null;
     }
     
-    protected void setFailureMessage(String message) {
-        failureMessage = message;
+    protected void setChildTest(TestGroup child) {
+        childTest = child;
     }
     
-    public TestGroup(String identifier) {
-        this(identifier, new TestGroup[]{});
+    protected void setFailureMessage(String message) {
+        failureMessage = message;
     }
     
     public final void setSubtests(TestGroup[] tests) {
@@ -99,10 +108,35 @@ public abstract class TestGroup extends Timeable {
                 return false;
             }
         }
-        return true;
+        return childTest.run();
     }
     
     public void addSelfTo(HashMap<String, TestGroup> map) {
         map.put(getName(), this);
+    }
+    
+    protected boolean assertEquals(Object a, Object b) {
+        if (a.equals(b)) {
+            return true;
+        } else {
+            setFailureMessage(a + " not equal to " + b);
+            return false;
+        }
+    }
+    
+    private class AlwaysPasses extends TestGroup {
+        public AlwaysPasses() {
+            super(NO_CHILDREN);
+        }
+        
+        @Override
+        protected boolean mainTest() {
+            return true;
+        }
+        
+        @Override
+        public boolean run() {
+            return true;
+        }
     }
 }

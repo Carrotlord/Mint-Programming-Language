@@ -24,7 +24,7 @@ public class ExampleTests extends TestGroup {
             new TestGroup("always_fails") {
                 @Override
                 protected boolean mainTest() {
-                    return false;
+                    return assertEquals(0.2 + 0.1, 0.3);
                 }
             }
         };
