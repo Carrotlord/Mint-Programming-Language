@@ -42,7 +42,7 @@ y = <span class="number2">2</span>(x)
 z = (x+<span class="number2">3</span>)y
 <span class="keyword">print</span> z    <span class="comment2">// Prints 0.78125</span></pre>
 </td></tr></table>
-What you need to do is place one of the multiplicands in parentheses, and put the other either before or after it.
+What you need to do is place one of the multiplicands in parentheses (or both of them), and put the other either before or after it.
 <br><br>
 
 <span class="section_title">String Operators</span><br>
@@ -95,11 +95,30 @@ Bitwise operators treat integers as 32-bit fields and perform operations on thos
 
 The choices for bitwise or and bitwise xor look really strange. For bitwise xor, note that <code>^</code> is used for exponentiation, so <code>$</code> is substituted. In the Julia language, which also uses <code>^</code> for exponentiation, <code>$</code> is the bitwise xor operator. For bitwise or, <code>|</code> is used for something we will discuss later, so <code>@</code> is substituted. You can also use <code>andb</code>, <code>orb</code>, <code>xorb</code>, <code>notb</code> keywords which are equivalent to <code>&amp;</code>, <code>@</code>, <code>$</code>, <code>~</code> respectively if you find the keywords easier to read.<br><br>
 
+<span class="section_title">Assignment Operators</span><br>
+The following operators assign a value to a variable. Many of these are shorthand operators, combining an existing operator with the assignment operator <code>=</code>.
+
+<table class="simple">
+<tr><th class="simple_th">Operation</th><th class="simple_th">Symbol</th><th class="simple_th">Usage</th></tr>
+<tr><td class="simple_td">Assignment</td><td class="simple_td">=</td><td class="monospace simple_td">variable = value</td></tr>
+<tr><td class="simple_td">a = a + b</td><td class="simple_td">+=</td><td class="monospace simple_td">a += b</td></tr>
+<tr><td class="simple_td">a = a - b</td><td class="simple_td">-=</td><td class="monospace simple_td">a -= b</td></tr>
+<tr><td class="simple_td">a = a * b</td><td class="simple_td">*=</td><td class="monospace simple_td">a *= b</td></tr>
+<tr><td class="simple_td">a = a / b</td><td class="simple_td">/=</td><td class="monospace simple_td">a /= b</td></tr>
+<tr><td class="simple_td">a = a ^ b</td><td class="simple_td">^=</td><td class="monospace simple_td">a ^= b</td></tr>
+<tr><td class="simple_td">a = a % b</td><td class="simple_td">%=</td><td class="monospace simple_td">a %= b</td></tr>
+<tr><td class="simple_td">a = a &amp; b</td><td class="simple_td">&amp;=</td><td class="monospace simple_td">a &amp;= b</td></tr>
+<tr><td class="simple_td">a = a @ b</td><td class="simple_td">@=</td><td class="monospace simple_td">a @= b</td></tr>
+<tr><td class="simple_td">a = a $ b</td><td class="simple_td">$=</td><td class="monospace simple_td">a $= b</td></tr>
+<tr><td class="simple_td">a = a &lt;&lt; b</td><td class="simple_td">&lt;&lt;=</td><td class="monospace simple_td">a &lt;&lt;= b</td></tr>
+<tr><td class="simple_td">a = a &gt;&gt; b</td><td class="simple_td">&gt;&gt;=</td><td class="monospace simple_td">a &gt;&gt;= b</td></tr>
+</table>
+
 Control flow is discussed in the next lesson.<br><br>
 
 <span class="nav">Quick Navigation</span><br>
 Previous Lesson: <a href="running_prgms.html">Running Programs</a><br>
-Next Lesson: <a href="ctrl_flow_1.html">Control Flow</a><br>
+Next Lesson: <a href="ctrl_flow.html">Control Flow</a><br>
 
 <br><br>
 </td></tr></table>

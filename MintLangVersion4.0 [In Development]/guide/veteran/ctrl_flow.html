@@ -1,0 +1,175 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../css/styles.css">
+<title>Control Flow</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Control Flow</span><br />
+<span class="subtitle">Statements and Loops</span>
+</div>
+<br>
+<table class="main"><tr><td>
+
+<span class="section_title">If Statements</span><br>
+If statements have the following syntax. No parentheses are required around the condition. The block may contain any number of statements, and closes with the <code>end</code> keyword.<br>
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">x = <span class="number2">-154</span>
+<span class="keyword">if</span> x &lt; <span class="number2">0</span>
+    <span class="keyword">print</span> <span class="string2">"x is negative."</span>
+<span class="keyword">end</span></pre>
+</td></tr></table><br>
+
+If statements can have optional <code>else</code> and <code>else if</code> statements following them.<br>
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">x = <span class="number2">3.3</span>
+<span class="keyword">if</span> x == <span class="number2">0</span>
+    <span class="keyword">print</span> <span class="string2">"x is zero."</span>
+<span class="keyword">else if</span> x &gt; <span class="number2">0</span>
+    <span class="keyword">print</span> <span class="string2">"x is positive."</span>
+<span class="keyword">else</span>
+    <span class="keyword">print</span> <span class="string2">"x is negative."</span>
+<span class="keyword">end</span>
+
+name = <span class="keyword">input</span>
+<span class="keyword">if</span> name == <span class="string2">"Alice"</span> <span class="keyword">or</span> name == <span class="string2">"Bob"</span>
+    <span class="keyword">print</span> <span class="string2">"Welcome!"</span>
+<span class="keyword">else</span>
+    <span class="keyword">print</span> <span class="string2">"Who are you?"</span>
+<span class="keyword">end</span></pre>
+</td></tr></table><br>
+
+<span class="section_title">When Statements</span><br>
+When you have if statements that contain only 1 line in the block, use the <code>when</code> keyword to avoid having to close the block with an <code>end</code> statement.<br>
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">x = <span class="keyword">input</span>
+<span class="keyword">when</span> x == <span class="string2">"pancakes"</span>
+    <span class="keyword">print</span> <span class="string2">"You're having pancakes?"</span>
+<span class="comment2">// More code here.</span></pre>
+</td></tr></table><br>
+
+<span class="section_title">While Loop</span><br>
+While loops execute their block while their condition is true.<br>
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">i = <span class="number2">11</span>
+<span class="keyword">while</span> i &gt; <span class="number2">0</span>
+    i--
+    <span class="keyword">print</span> i
+<span class="keyword">end</span>
+<span class="keyword">print </span><span class="string2">"Done!"</span></pre>
+</td></tr></table><br>
+
+<span class="section_title">For Loop</span><br>
+For loops contain an initialization, condition, and update, separated by semicolons.<br>
+<table class="width_down"><tr><td>
+<pre class="mint_code_box"><span class="keyword">for</span> i = <span class="number2">10</span>; i >= <span class="number2">0</span>; i--
+    <span class="keyword">print</span> i
+<span class="keyword">end</span>
+<span class="keyword">print</span> <span class="string2">"Done!"</span></pre>
+</td></tr></table><br>
+
+<span class="section_title">For-each Loop</span><br>
+For-each loops assign each element of an iterable to a variable during each iteration of the loop.<br>
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">x = <span class="string2">"hello"</span>                               <span class="comment2">// This is a string.</span>
+y = [<span class="number2">10</span>, <span class="number2">9</span>, <span class="number2">8</span>, <span class="number2">7</span>, <span class="number2">6</span>, <span class="number2">5</span>, <span class="number2">4</span>, <span class="number2">3</span>, <span class="number2">2</span>, <span class="number2">1</span>, <span class="number2">0</span>]    <span class="comment2">// This is a list of integers.</span>
+<span class="keyword">for</span> <span class="keyword">each</span> i <span class="keyword">of</span> y
+    <span class="keyword">print </span>i            <span class="comment2">//Counts down from 10 to 0.</span>
+<span class="keyword">end</span>
+<span class="keyword">for</span> <span class="keyword">each</span> character <span class="keyword">of</span> x
+    <span class="keyword">print </span>character    <span class="comment2">//Prints every character in "hello".</span>
+<span class="keyword">end</span></pre>
+</td></tr></table>
+Lists will be discussed in the next lesson.
+<br><br>
+<span class="section_title">Break and Continue</span><br>
+All loops support <code>break</code>, which exits the loop immediately, and <code>continue</code>, which goes to the next iteration without checking the condition or performing the update of a for loop.
+
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">n = <span class="number2">697</span>
+i = <span class="number2">2</span>
+squareRootN = n ^ <span class="number2">0.5</span>
+isBroken = <span class="keyword">false</span>
+<span class="keyword">while</span> i &lt;= squareRootN + <span class="number2">1</span>
+    <span class="keyword">if</span> n % i == <span class="number2">0</span>
+        isBroken = <span class="keyword">true</span>
+        <span class="keyword">break</span>
+    <span class="keyword">else</span>
+        i++
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">if</span> isBroken
+    <span class="keyword">print</span> <span class="string2">"The factors of "</span> + n + <span class="string2">" are "</span> + i + <span class="string2">", "</span> + intDiv(n, i)
+<span class="keyword">else</span>
+    <span class="keyword">print</span> n + <span class="string2">" is prime."</span>
+<span class="keyword">end</span>
+
+base = <span class="number2">2.718282</span>
+exponent = <span class="number2">12</span>
+answer = <span class="number2">1</span>
+<span class="keyword">for</span> p = exponent; p &gt; <span class="number2">0</span>; p &gt;&gt;= <span class="number2">1</span>
+    <span class="keyword">if</span> (p &amp; <span class="number2">1</span>) == <span class="number2">1</span>
+        answer *= base
+        p--
+        <span class="keyword">continue</span>
+    <span class="keyword">else</span>
+        answer *= answer
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+<span class="keyword">print</span> base + <span class="string2">" to the "</span> + exponent + <span class="string2">" power is: "</span> + answer</pre>
+</td></tr></table><br>
+
+Breaking out of multiple loops requires <code>break n</code>, where <code>n</code> is an integer literal representing the number of loops. You cannot use a variable name in place of the number <code>n</code>. Continuing outer loops when you have nested loops similarly requires <code>continue n</code>. Try to use these sparingly.
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">s = <span class="string2">"I'm leaving."</span>
+<span class="keyword">while true</span>
+    <span class="keyword">for</span> i = <span class="number2">1</span>; i &gt; <span class="number2">0</span>; i++
+        <span class="keyword">when</span> s == <span class="string2">"I'm leaving."</span>
+            <span class="keyword">break</span> <span class="number2">2</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> j = <span class="number2">0</span>; j &lt; <span class="number2">100</span>; j++
+    <span class="keyword">for</span> k = <span class="number2">0</span>; k &lt; <span class="number2">100</span>; k++
+        <span class="keyword">if</span> k % <span class="number2">5</span> == <span class="number2">0</span>
+            <span class="keyword">continue</span> <span class="number2">2</span>
+        <span class="keyword">else</span>
+            <span class="keyword">print</span> k * j
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span></pre>
+</td></tr></table><br>
+
+<span class="section_title">Switch Statement</span><br>
+Switches are more efficient alternatives to long chains of <code>if ... else if ... else</code>. Because they use the equivalent of branch tables, they jump to their case in constant time, while it takes linear time to reach a certain case in an <code>else if</code> chain.
+<br><br>
+Switches in Mint are a little different than in some languages. Cases <span class="italic">do not fallthrough</span>, so there is essentially an implicit break at the end of each case. Don't actually put <code>break</code> in the switch; it will just break any loop that encloses the switch. To have multiple cases do the same thing, group the cases together as comma separated values:
+
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">x = <span class="number2">3</span>
+
+<span class="keyword">switch </span>x
+    <span class="keyword">case </span><span class="number2">1</span>
+        <span class="keyword">print </span><span class="string2">"x is one."</span>
+    <span class="keyword">case </span><span class="number2">2</span>, <span class="number2">3</span>, <span class="number2">4</span>
+        <span class="keyword">print </span><span class="string2">"x is in the set {2, 3, 4}."</span>
+    <span class="keyword">case </span><span class="number2">5</span>
+        <span class="keyword">print </span><span class="string2">"x is five."</span>
+    <span class="keyword">default</span>
+        <span class="keyword">print </span><span class="string2">"x is not an integer between 1 and 5."</span>
+<span class="keyword">end</span></pre>
+</td></tr></table><br>
+
+<span class="nav">Quick Navigation</span><br>
+Previous Lesson: <a href="operators.html">Operators</a><br>
+Next Lesson: <a href="lists_arrays.html">Lists and Arrays</a><br>
+
+<br><br>
+</td></tr></table>
+<br><br><br>
+
+</html>

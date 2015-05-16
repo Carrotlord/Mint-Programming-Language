@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<link rel="stylesheet" type="text/css" href="../css/styles.css">
+<title>Control Flow</title>
+</head>
+
+<body>
+
+<div class="center">
+<span class="lesson_title">Lists and Arrays</span><br />
+<span class="subtitle">Sequential Data Structures</span>
+</div>
+<br>
+<table class="main"><tr><td>
+<span class="section_title">Lists and Arrays</span><br>
+Lists are Mint's main data structure for sequential data, declared with square brackets surrounding elements. Arrays offer speed boosts while imposing additional restrictions, declared with the word <code>Array</code> followed by elements in square brackets.<br><br>
+
+Lists are dynamic arrays, so when their capacity is exceeded they allocate more space to fit additional elements. Lists are also heterogeneous, meaning that a single list can hold elements of differing types, such as a string and an integer in the same list.
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">myList = [2, 3, 4, "water", "potassium", 1:2]
+nestedList = [[1, 1], [2, 4], [3, 9], [4, 16]]</pre>
+</td></tr></table><br>
+
+Arrays are static, they must hold elements of exactly the same type, and items cannot be appended without manually resizing the array.
+<table class="width_down"><tr><td>
+<pre class="mint_code_box">intArray = Array[16, 18, 1, 0]    // An array's type is determined by its elements
+array2D = Array[Array[1, 2], Array[8, 5]]    // An array of type Array&lt;Array&lt;Int&gt;&gt;</pre>
+</td></tr></table><br>
+
+<span class="nav">Quick Navigation</span><br>
+Previous Lesson: <a href="ctrl_flow.html">Control Flow</a><br>
+Next Lesson: <a href="tables.html">Tables</a><br>
+
+<br><br>
+</td></tr></table>
+<br><br><br>
+
+</html>
