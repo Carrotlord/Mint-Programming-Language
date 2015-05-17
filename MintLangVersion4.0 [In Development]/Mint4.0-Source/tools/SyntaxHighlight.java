@@ -28,15 +28,16 @@ public class SyntaxHighlight {
             masterTrie.addAll(MINT_KEYWORDS);
             /* numericTrie detects floating point and integer literals. */
             numericTrie = new RegexTrie(
-                "-?(0x|0o|0b)?(\\d+)?\\.?\\d+([eE]-?\\d+)?(\\[\\d+\\])?");
-            /* stringTrie detects double or single quoted strings. */
-            stringTrie = new RegexTrie("\\[\"'](.|\\\\\\\")*?\\[\"']");
-            /* stringTrie detects valid tag syntax. */
+                "[xob]?(\\d+)?\\.?\\d+([eE]-?\\d+)?(\\[\\d+\\])?");
+            /* stringTrie detects double or single quoted strings
+             * with or without escapes. */
+            stringTrie = new RegexTrie("(.*?[^\\\\])?['\"]");
+            /* tagTrie detects valid tag syntax. */
             tagTrie = new RegexTrie(
-                "#[_A-Za-z][_A-Za-z0-9\\(\\)\\.,]*?[_A-Za-z0-9\\)]");
+                "[_A-Za-z][_A-Za-z0-9\\(\\)\\.,]*[_A-Za-z0-9\\)]");
             /* commentTrie detects single and multiline comments. */
             commentTrie = new RegexTrie(
-                "(//.*\n)|(/\\*(.|\n)*\\*/)");
+                "(/.*\n)|(\\*(.|\n)*\\*/)");
             masterTrie.setChild(tagTrie, '#');
             masterTrie.setChild(stringTrie, '"');
             masterTrie.setChild(stringTrie, '\'');
@@ -51,6 +52,7 @@ public class SyntaxHighlight {
 
     public String highlight(String code) {
         String result = "";
+        code += "\n";
         for (int i = 0; i < code.length(); i++) {
             String grabbed = masterTrie.grab(code, i);
             if (grabbed != null && grabbed.length() > 0) {
@@ -60,7 +62,7 @@ public class SyntaxHighlight {
                 result += code.charAt(i);
             }
         }
-        return result;
+        return result.substring(0, result.length() - 1);
     }
     
     private String wrapAny(String innerHTML) {
@@ -72,7 +74,9 @@ public class SyntaxHighlight {
                 case '\'':
                     return wrap(innerHTML, "string2");
                 case '/':
-                    return wrap(innerHTML, "comment2");
+                    return wrap(innerHTML, "comment2").replace(
+                        "\n</span>", "</span>\n"
+                    );
                 case '0': case '1': case '2': case '3':
                 case '4': case '5': case '6': case '7':
                 case '8': case '9': case '-':
@@ -142,6 +146,9 @@ public class SyntaxHighlight {
                 }
             }
             int first = s.charAt(runningIndex) - ' ';
+            if (first < 0 || first > ASCII_RANGE - 1) {
+                return first == '\n' - ' ' ? "" : null;
+            }
             Trie firstChild = children[first];
             if (firstChild == null) {
                 if (isLeaf) {
@@ -242,7 +249,7 @@ public class SyntaxHighlight {
 
         @Override
         public boolean contains(String s) {
-            return triePattern.matcher(s).lookingAt();
+            return contains(s, 0);
         }
     }
 }

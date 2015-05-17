@@ -94,17 +94,19 @@ public abstract class TestGroup extends Timeable {
         return hasFailed;
     }
     
+    @Override
     public boolean run() {
         updateFailedStatus(mainTest());
         if (getHasFailed()) {
             Mint.IO.printerr(failedMessage());
             return false;
         }
-        for (int i = 0; i < subTests.length; i++) {
-            updateFailedStatus(subTests[i].run());
+        for (TestGroup subTest : subTests) {
+            updateFailedStatus(subTest.run());
             if (getHasFailed()) {
-                Mint.IO.printerr(failedMessage(subTests[i],
-                                      "see above for reason"));
+                Mint.IO.printerr(failedMessage(subTest,
+                    "see above for reason"
+                ));
                 return false;
             }
         }

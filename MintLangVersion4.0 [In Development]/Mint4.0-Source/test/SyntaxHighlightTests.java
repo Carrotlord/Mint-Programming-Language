@@ -61,6 +61,75 @@ public class SyntaxHighlightTests extends TestGroup {
                         "<span class=\"number2\">-20</span>"  
                     );
                 }
+            },
+            new TestGroup("strings") {
+                @Override
+                protected boolean mainTest() {
+                    String highlighted = (new SyntaxHighlight()).highlight(
+                         "\"This is a\" + 'string' + \".\\\"...\\'\" + \"\""
+                    );
+                    return assertEquals(highlighted,
+                        "<span class=\"string2\">\"This is a\"</span> + " +
+                        "<span class=\"string2\">'string'</span> + " +
+                        "<span class=\"string2\">\".\\\"...\\'\"</span> + " +
+                        "<span class=\"string2\">\"\"</span>"
+                    );
+                }
+            },
+            new TestGroup("tags") {
+                @Override
+                protected boolean mainTest() {
+                    String highlighted = (new SyntaxHighlight()).highlight(
+                        "#Int #category,#x.y #xs.ys #Array(Int) " +
+                        "#Array(Array(Int))"
+                    );
+                    return assertEquals(highlighted,
+                        "<span class=\"tag\">#Int</span> " +
+                        "<span class=\"tag\">#category</span>," +
+                        "<span class=\"tag\">#x.y</span> " +
+                        "<span class=\"tag\">#xs.ys</span> " +
+                        "<span class=\"tag\">#Array(Int)</span> " +
+                        "<span class=\"tag\">#Array(Array(Int))</span>"
+                    );
+                }
+            },
+            new TestGroup("comments") {
+                @Override
+                protected boolean mainTest() {
+                    String highlighted = (new SyntaxHighlight()).highlight(
+                        "// stuff \n/* stuff \n\n */"
+                    );
+                    return assertEquals(highlighted,
+                        "<span class=\"comment2\">// stuff </span>\n" +
+                        "<span class=\"comment2\">/* stuff \n\n */</span>"
+                    );
+                }
+            },
+            new TestGroup("actual_code") {
+                @Override
+                protected boolean mainTest() {
+                    String highlighted = (new SyntaxHighlight()).highlight(
+                        "y = null\n" +
+                        "if x > 0.0\n" +
+                        "    y = \"some string.\"\n" +
+                        "else\n" +
+                        "    y = [18, 19, #h2o]\n" +
+                        "end // end of file"
+                    );
+                    return assertEquals(highlighted,
+                        "y = <span class=\"keyword\">null</span>\n" +
+                        "<span class=\"keyword\">if</span> x > " +
+                        "<span class=\"number2\">0.0</span>\n" +
+                        "    y = <span class=\"string2\">" +
+                        "\"some string.\"</span>\n" +
+                        "<span class=\"keyword\">else</span>\n" +
+                        "    y = [<span class=\"number2\">18</span>, " +
+                        "<span class=\"number2\">19</span>, " +
+                        "<span class=\"tag\">#h2o</span>]\n" +
+                        "<span class=\"keyword\">end</span> " +
+                        "<span class=\"comment2\">// end of file</span>"
+                    );
+                }
             }
         };
         setSubtests(tests);
