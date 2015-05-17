@@ -7,7 +7,7 @@ import java.util.LinkedList;
  * @author Jiangcheng Oliver Chu
  */
 public class RPNCompiler {
-    private CharLinkedList stack = new CharLinkedList();
+    private DenseLinkedList stack = new DenseLinkedList();
     private String code;
     private int currentTempVar = 0;
     private LinkedList<String> successorOutput = new LinkedList<String>();

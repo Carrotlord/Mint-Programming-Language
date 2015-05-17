@@ -1,6 +1,6 @@
 package test;
 
-import mint.CharLinkedList;
+import mint.DenseLinkedList;
 
 /**
  * Tests for custom data structures.
@@ -14,7 +14,7 @@ public class DataTests extends TestGroup {
                 @Override
                 protected boolean mainTest() {
                     String str = "This is a test.";
-                    CharLinkedList cq = new CharLinkedList();
+                    DenseLinkedList cq = new DenseLinkedList();
                     for (char c : str.toCharArray()) {
                         cq.push(c);
                     }
@@ -27,7 +27,7 @@ public class DataTests extends TestGroup {
                 protected boolean mainTest() {
                     String backwards = "\u266b sdrawkcaB";
                     String forwards = "Backwards \u266b";
-                    CharLinkedList cq = new CharLinkedList();
+                    DenseLinkedList cq = new DenseLinkedList();
                     for (char c : backwards.toCharArray()) {
                         cq.push(c);
                     }

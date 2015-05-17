@@ -7,14 +7,14 @@ import java.util.NoSuchElementException;
  * Intended as a stack and a queue.
  * @author Jiangcheng Oliver Chu
  */
-public class CharLinkedList {
+public class DenseLinkedList {
     private CharNodeBundle eldest = null;
     private CharNodeBundle youngest = null;
     public static final char NIL = 0;
     private int writePosition = 0;
     private int readPosition = 0;
     
-    public CharLinkedList() {}
+    public DenseLinkedList() {}
     
     public void push(char c) {
         if (eldest == null || youngest == null) {

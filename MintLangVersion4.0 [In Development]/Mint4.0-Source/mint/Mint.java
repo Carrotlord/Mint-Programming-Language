@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import test.*;
+import tools.SyntaxHighlight;
 
 /**
  * Mint Programming Language, version 4 - the "compiled to bytecode" edition.
@@ -64,7 +65,8 @@ public class Mint implements InputOutputMachine {
             new AssemblerTests(),
             new SuccessorTests(),
             new DataTests(),
-            new CompilerTests()
+            new CompilerTests(),
+            new SyntaxHighlightTests()
         };
         (new TestRunner(allTests)).runTests();
     }
@@ -72,14 +74,17 @@ public class Mint implements InputOutputMachine {
     /** Prints object to console; can be redirected to a file or other output.
      * @param o object to be printed
      */
+    @Override
     public void println(Object o) {
         output.println(o);
     }
     
+    @Override
     public void print(Object o) {
         output.print(o);
     }
     
+    @Override
     public void printerr(Object o) {
         System.err.println(o);
     }
@@ -88,18 +93,22 @@ public class Mint implements InputOutputMachine {
      * @return user input
      * @throws IOException 
      */
+    @Override
     public String getln() throws IOException {
         return keyboard.readLine();
     }
     
+    @Override
     public void debug(Object o) {
         output.print("DEBUG: " + o);
     }
     
+    @Override
     public void debugln(Object o) {
         output.println("DEBUG: " + o);
     }
     
+    @Override
     public void debugerr(Object o) {
         System.err.println("DEBUG: " + o);
     }

@@ -91,13 +91,13 @@ public class ShuntingYard {
      * @param infixExpression
      * @return RPN linked list
      */
-    public static CharLinkedList infixToRPN(String infixExpression)
+    public static DenseLinkedList infixToRPN(String infixExpression)
            throws MintException {
         if (!isInitialized) {
             initialize();
         }
-        CharLinkedList stack = new CharLinkedList();
-        CharLinkedList queue = new CharLinkedList();
+        DenseLinkedList stack = new DenseLinkedList();
+        DenseLinkedList queue = new DenseLinkedList();
         for (char token : infixExpression.toCharArray()) {
             if ((token >= '0' && token <= '9') ||
                 (token >= 'a' && token <= 'z') ||
