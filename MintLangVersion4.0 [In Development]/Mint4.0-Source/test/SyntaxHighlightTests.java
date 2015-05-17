@@ -30,6 +30,37 @@ public class SyntaxHighlightTests extends TestGroup {
                         "<span class=\"keyword\">into</span>"
                     );
                 }
+            },
+            new TestGroup("integers") {
+                @Override
+                protected boolean mainTest() {
+                    String highlighted = (new SyntaxHighlight()).highlight(
+                                          "3 15623 0 81 -2 -20");
+                    return assertEquals(highlighted,
+                        "<span class=\"number2\">3</span> " +
+                        "<span class=\"number2\">15623</span> " +
+                        "<span class=\"number2\">0</span> " +
+                        "<span class=\"number2\">81</span> " +
+                        "<span class=\"number2\">-2</span> " +
+                        "<span class=\"number2\">-20</span>"
+                    );
+                }
+            },
+            new TestGroup("reals_rationals") {
+                @Override
+                protected boolean mainTest() {
+                    String highlighted = (new SyntaxHighlight()).highlight(
+                                          "3.0 1.56e23 -0.0 -8:1 -2.0e-9:-20");
+                    return assertEquals(highlighted,
+                        "<span class=\"number2\">3.0</span> " +
+                        "<span class=\"number2\">1.56e23</span> " +
+                        "<span class=\"number2\">-0.0</span> " +
+                        "<span class=\"number2\">-8</span>:" +
+                        "<span class=\"number2\">1</span> " +
+                        "<span class=\"number2\">-2.0e-9</span>:" +
+                        "<span class=\"number2\">-20</span>"  
+                    );
+                }
             }
         };
         setSubtests(tests);

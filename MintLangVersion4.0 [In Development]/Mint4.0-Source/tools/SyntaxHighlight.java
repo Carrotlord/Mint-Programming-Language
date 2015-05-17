@@ -28,7 +28,7 @@ public class SyntaxHighlight {
             masterTrie.addAll(MINT_KEYWORDS);
             /* numericTrie detects floating point and integer literals. */
             numericTrie = new RegexTrie(
-                "-?(0x|0o|0b)?(\\d\\.)?\\d+([eE]-?\\d+)?(\\[\\d+\\])?");
+                "-?(0x|0o|0b)?(\\d+)?\\.?\\d+([eE]-?\\d+)?(\\[\\d+\\])?");
             /* stringTrie detects double or single quoted strings. */
             stringTrie = new RegexTrie("\\[\"'](.|\\\\\\\")*?\\[\"']");
             /* stringTrie detects valid tag syntax. */
@@ -214,12 +214,29 @@ public class SyntaxHighlight {
         @Override
         public boolean contains(String s, int runningIndex) {
             Matcher trieMatcher = triePattern.matcher(s);
+            Matcher simpleMatcher = triePattern.matcher(s);
             trieMatcher.region(runningIndex, s.length());
+            boolean isAhead = runningIndex > 0;
+            if (isAhead) {
+                simpleMatcher.region(runningIndex - 1, runningIndex);
+            }
             if (trieMatcher.lookingAt()) {
-                setMatch(s);
+                setMatch(trieMatcher.group());
+                return true;
+            } else if (isAhead && simpleMatcher.lookingAt()) {
+                setMatch("");
                 return true;
             } else {
                 return false;
+            }
+        }
+        
+        @Override
+        public String grab(String s, int runningIndex) {
+            if (contains(s, runningIndex)) {
+                return getMatch();
+            } else {
+                return null;
             }
         }
 
